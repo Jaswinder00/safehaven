@@ -1,0 +1,7 @@
+dc_gov_haven:
+    resource: "@DCGovHavenBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
