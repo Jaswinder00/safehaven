@@ -23,10 +23,9 @@ else
   php app/console assetic:dump
 fi
 
-
-chown -R www-data:www-data app/cache
+chown -R apache:apache app/cache
 chmod -R 755 app/cache
-chown -R www-data:www-data app/logs
+chown -R apache:apache app/logs
 
 if [ "$1" = "prod" ] || [ "$2" = "-o" ]; then
  echo "Running composer to optimize the code"

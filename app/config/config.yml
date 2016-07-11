@@ -35,6 +35,81 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+# assetic for asset management
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+    assets:
+        glyphicons-halflings-regular-woff:
+            inputs:
+                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
+            output: fonts/glyphicons-halflings-regular.woff
+        glyphicons-halflings-regular-woff2:
+            inputs: 
+                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+            output: fonts/glyphicons-halflings-regular.woff2
+        
+        jquery_js:
+            inputs: 
+                 - "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+            output: js/jquery.js
+        
+        jquery_datatable_js:
+            inputs: 
+                 - "%kernel.root_dir%/../vendor/datatables/datatables/media/js/jquery.dataTables.min.js"
+                 - "%kernel.root_dir%/../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js"
+            output: js/datatables.js
+            
+        jquery_datatable_css:
+            inputs:
+                - "%kernel.root_dir%/../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css"
+            filters:
+                - cssrewrite
+            output: css/datatable.css
+        
+        jquery_datatable_image_sort_asc:
+            inputs: 
+                - "%kernel.root_dir%/../vendor/datatables/datatables/media/images/sort_asc.png"
+            output: images/sort_asc.png
+
+        jquery_datatable_image_sort_desc:
+            inputs: 
+                - "%kernel.root_dir%/../vendor/datatables/datatables/media/images/sort_desc.png"
+            output: images/sort_desc.png
+        
+        jquery_datatable_image_sort_both:
+            inputs: 
+                - "%kernel.root_dir%/../vendor/datatables/datatables/media/images/sort_both.png"
+            output: images/sort_both.png
+                                
+        bootstrap_css:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css"
+                - "%kernel.root_dir%/../vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.css"
+            filters:
+                - cssrewrite
+            output: css/bootstrap.css
+        bootstrap_js:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"
+         #      - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-transition.js
+         #      - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-alert.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-button.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-carousel.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-collapse.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-dropdown.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-modal.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-tooltip.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-popover.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-scrollspy.js
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js"
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-typeahead.js
+         #       - %kernel.root_dir%/../vendor/twbs/bootstrap/js/bootstrap-affix.js
+                - "%kernel.root_dir%/../vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.js"
+            output: js/bootstrap.js
+    
 # Doctrine Configuration
 doctrine:
     dbal:
