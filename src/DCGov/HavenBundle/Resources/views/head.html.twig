@@ -1,0 +1,22 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}GREO Tools{% endblock %}</title>
+    
+	{% block stylesheets %}
+
+		<!-- Bootstrap -->
+	    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	    
+	    <!-- Datatable --->
+	    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+
+		{% stylesheets 
+			'@DCGovHavenBundle/Resources/public/css/signin.css'
+			filter='cssrewrite'
+		%}
+		    	<link rel="stylesheet" href="{{ asset_url }}" />
+		{% endstylesheets %}
+   {% endblock stylesheets %}
+    
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    

@@ -1,3 +1,7 @@
+dc_gov_haven_role:
+    resource: "@DCGovHavenBundle/Resources/config/routing/role.yml"
+    prefix:   /role
+
 login:
     path: /login
     defaults: { _controller: "DCGovHavenBundle:Security:login" }
@@ -13,5 +17,5 @@ dc_gov_haven_login:
     defaults:  { _controller: "DCGovHavenBundle:Security:login" }    
 
 dc_gov_haven_homepage:
-    path:     /safehaven/
+    path:     /safehaven
     defaults: { _controller: "DCGovHavenBundle:Default:index" }

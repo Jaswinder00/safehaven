@@ -1,25 +1,3 @@
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}GREO Tools{% endblock %}</title>
-    
-   {% block stylesheets %}
-	
-	<!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-    
-    <!-- Datatable --->
-    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
-	
-	{% stylesheets 
-		'@DCGovHavenBundle/Resources/public/css/signin.css'
-		filter='cssrewrite'
-	%}
-    	<link rel="stylesheet" href="{{ asset_url }}" />
-	{% endstylesheets %}
-   {% endblock stylesheets %}
-    
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    
     <script type="text/javascript" defer>
     	<!--- Initalize Javascript path variables ---!>
 		var _route = "{{ app.request.attributes.get('_route') }}";
@@ -43,3 +21,31 @@
             {% endjavascripts %}
             
 	{% endblock javascripts %}
+	<div class="top-container">
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	        <div class="container-fluid" data-pg-collapsed>
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                    <span class="sr-only">Toggle navigation</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <a class="navbar-brand" href="#">DC.Gov - Safe Haven</a>
+	            </div>
+	            {% if app.user %}
+	            <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{{ path('dc_gov_haven_homepage') }}">Safe Haven Home</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ path('logout') }}">Logout</a>
+                        </li>
+                    </ul>
+	        	</div>
+	        	{% endif %}
+			</div>
+	</div>
+</div>

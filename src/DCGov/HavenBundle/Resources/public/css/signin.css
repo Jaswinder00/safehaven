@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
-#login-form-container {
-	padding-top: 5em;	
+.top-container {
+	padding-top: 4em;	
 }
 .form-signin {
   max-width: 330px;

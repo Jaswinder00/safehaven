@@ -6,15 +6,20 @@
     	{% endblock head %}
     </head>
     <body>
-    	{% block header %}
-    		{% include 'DCGovHavenBundle::header.html.twig' %}
-    	{% endblock header %}
+    	<header>
+	    	{% block header %}
+	    		{% include 'DCGovHavenBundle::header.html.twig' %}
+	    	{% endblock header %}
+    	</header>
+    	
         {% block body %}
         	{% include 'DCGovHavenBundle::sidemenu.html.twig' %}
         {% endblock %}
         
-        {% block footer %}
-        	{% include 'DCGovHavenBundle::footer.html.twig' %}
-        {% endblock %}
+        <footer>
+	        {% block footer %}
+	        	{% include 'DCGovHavenBundle::footer.html.twig' %}
+	        {% endblock %}
+	    </footer>
     </body>
 </html>

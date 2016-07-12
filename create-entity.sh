@@ -9,6 +9,6 @@ fi
 
 php app/console doctrine:generate:entities DCGovHavenBundle:$entity --path src
 php app/console generate:doctrine:crud --entity=DCGovHavenBundle:$entity --overwrite
-chown -R developer:www-data src/DCGov/HavenBundle/
+chown -R jaswinder:apache src/DCGov/HavenBundle/
 
-chown www-data:www-data /app/logs/dev.log
+chown apache:apache /app/logs/dev.log
