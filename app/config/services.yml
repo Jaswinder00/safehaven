@@ -4,6 +4,11 @@ parameters:
 #    parameter_name: value
 
 services:
+   id_store:
+      class: DCGov\HavenBundle\Store\IdStore
+      arguments:
+          - "@=service('doctrine').getManager()"
+          - "@lightsaml.system.time_provider"
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

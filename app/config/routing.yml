@@ -1,3 +1,7 @@
 dc_gov_haven:
     resource: "@DCGovHavenBundle/Resources/config/routing.yml"
     prefix:   /
+
+lightsaml_sp:
+    resource: "@LightSamlSpBundle/Resources/config/routing.yml"
+    prefix: saml

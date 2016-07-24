@@ -18,6 +18,9 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new DCGov\HavenBundle\DCGovHavenBundle(),
         	new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+        	//SAML Bundle
+        	new LightSaml\SymfonyBridgeBundle\LightSamlSymfonyBridgeBundle(),
+        	new LightSaml\SpBundle\LightSamlSpBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

@@ -8,20 +8,27 @@
 	<div class="container" id="login-form-container">
 		<form class="form-signin" id="login-form"
 			action="{{ path('login_check') }}" method="POST">
-			<h2 class="form-signin-heading">Log In</h2>
+			<h2 class="form-signin-heading col-sm-11">Log In</h2>
 			
 			<label for="email" class="sr-only">Email address</label>
-			<input id="email" class="form-control" name="_username" type="email" placeholder="Email Address" value="{{ last_username }}" required autofocus />
-			
+			<div class="col-sm-11">
+				<input id="email" class="form-control" name="_username" type="email" placeholder="Email Address" value="{{ last_username }}" required autofocus />
+				<i class="fa fa-user form-control-feedback"></i>
+			</div>
 			<label for="password" class="sr-only">Password</label>
-			<input id = "password" class="form-control" name="_password" type="password" placeholder="Password" required /> 
-			<div class="checkbox">
+			<div class="col-sm-11">
+				<input id = "password" class="form-control" name="_password" type="password" placeholder="Password" required />
+				<i class="fa fa-user form-control-feedback"></i>
+			</div> 
+							
+			<div class="checkbox col-sm-11">
                 <label>
                 	<input type="checkbox" value="remember-me"> Remember me
               	</label>
         	</div>
-			
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<div class="col-sm-11">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			</div>
 
 		</form>
 	</div>

@@ -19,3 +19,7 @@ dc_gov_haven_login:
 dc_gov_haven_homepage:
     path:     /safehaven
     defaults: { _controller: "DCGovHavenBundle:Default:index" }
+
+dc_gov_haven_secure:
+    path:     /secure
+    defaults: { _controller: "DCGovHavenBundle:Default:secure" }    

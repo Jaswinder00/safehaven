@@ -6,11 +6,15 @@
 
 		<!-- Bootstrap -->
 	    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-	    
+
+	    <!-- Font Awesome --->
+	    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+	    	    
 	    <!-- Datatable --->
 	    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
-
+	    
 		{% stylesheets 
+			'@DCGovHavenBundle/Resources/public/css/main.css'
 			'@DCGovHavenBundle/Resources/public/css/signin.css'
 			filter='cssrewrite'
 		%}

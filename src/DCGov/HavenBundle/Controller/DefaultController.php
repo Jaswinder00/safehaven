@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('DCGovHavenBundle:Default:index.html.twig');
     }
+
+    public function secureAction()
+    {
+        return $this->render('DCGovHavenBundle:Default:index.html.twig');
+    }
 }
