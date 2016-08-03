@@ -2,44 +2,59 @@
 
 namespace DCGov\HavenBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * @ORM\Entity()
+ * IdEntry
  */
 class IdEntry
 {
     /**
      * @var string
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $entityId;
+    private $assertionId;
 
     /**
      * @var string
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $id;
+    private $entityId;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=false)
+     * @var \DateTime
      */
-    protected $expiryTimestamp;
+    private $expiryTime;
 
     /**
-     * @return string
+     * @var integer
      */
-    public function getEntityId()
+    private $id;
+
+
+    /**
+     * Set assertionId
+     *
+     * @param string $assertionId
+     *
+     * @return IdEntry
+     */
+    public function setAssertionId($assertionId)
     {
-        return $this->entityId;
+        $this->assertionId = $assertionId;
+
+        return $this;
     }
 
     /**
+     * Get assertionId
+     *
+     * @return string
+     */
+    public function getAssertionId()
+    {
+        return $this->assertionId;
+    }
+
+    /**
+     * Set entityId
+     *
      * @param string $entityId
      *
      * @return IdEntry
@@ -52,45 +67,47 @@ class IdEntry
     }
 
     /**
-     * @return \DateTime
+     * Get entityId
+     *
+     * @return string
      */
-    public function getExpiryTime()
+    public function getEntityId()
     {
-        $dt = new \DateTime();
-        $dt->setTimestamp($this->expiryTimestamp);
-
-        return $dt;
+        return $this->entityId;
     }
 
     /**
+     * Set expiryTime
+     *
      * @param \DateTime $expiryTime
      *
      * @return IdEntry
      */
-    public function setExpiryTime(\DateTime $expiryTime)
+    public function setExpiryTime($expiryTime)
     {
-        $this->expiryTimestamp = $expiryTime->getTimestamp();
+        $this->expiryTime = $expiryTime;
 
         return $this;
     }
 
     /**
-     * @return string
+     * Get expiryTime
+     *
+     * @return \DateTime
+     */
+    public function getExpiryTime()
+    {
+        return $this->expiryTime;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * @param string $id
-     *
-     * @return IdEntry
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 }
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://jaswindersingh-dev-ed.my.salesforce.com" validUntil="2026-07-20T20:30:46.152Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+   <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+      <md:KeyDescriptor use="signing">
+         <ds:KeyInfo>
+            <ds:X509Data>
+               <ds:X509Certificate>MIIErDCCA5SgAwIBAgIOAVYKAAgRAAAAACX14acwDQYJKoZIhvcNAQELBQAwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzIwSnVsMjAxNl8yMDI5NDkxGDAWBgNVBAsMDzAwRDUwMDAwMDAwYXlIYTEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0EwHhcNMTYwNzIwMjAyOTQ5WhcNMTcwNzIwMTIwMDAwWjCBkDEoMCYGA1UEAwwfU2VsZlNpZ25lZENlcnRfMjBKdWwyMDE2XzIwMjk0OTEYMBYGA1UECwwPMDBENTAwMDAwMDBheUhhMRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExDDAKBgNVBAYTA1VTQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcaAsYvkBGX3gsIMIj6M2U0YvKUrvBvWo80qSNWgqeq9HTh2Ye6NSCqQ/Cu0zQHgqKtP0JIlzlZMI4jOVwRz+fGWTGv2+CLlyI4qAfEVpaQlh+5fsjCqg8rXuwo85NfBhsafpraMg9LluOjjS8f2PF8viMtB1TQUoWjoj24pPgH7HQ6nkhW3L79PYq/PQQK5QAIJk9/x85LN3LDa40U1qw86ykmwNTkq/xNigkAR9eJ69iJkBnqlaDtKwbpkg9wcyP0jeIOCw5JxPtjkFASIUhos2Mo8evACTbm5WUL2wTR7s3oV0gQ+arOFDF3s7A7HI34GOWoMmHQgHpF7x6Nd4ECAwEAAaOCAQAwgf0wHQYDVR0OBBYEFJY8GopLn+tq1Y/q4U1BTZ7F6Fm7MA8GA1UdEwEB/wQFMAMBAf8wgcoGA1UdIwSBwjCBv4AUljwaikuf62rVj+rhTUFNnsXoWbuhgZakgZMwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzIwSnVsMjAxNl8yMDI5NDkxGDAWBgNVBAsMDzAwRDUwMDAwMDAwYXlIYTEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0GCDgFWCgAIEQAAAAAl9eGnMA0GCSqGSIb3DQEBCwUAA4IBAQBn1pGKBZS0bhupnZ7ve5cs+1QP7BCMQA0FpL5V1nk6LS09hwTG0IzC8J4zzd4UCRMqr85xHRXvp0LGpptRVIyS4vB9bQ5sXwhN1clbhXXQwLys8SsVdcCP+1lVu24KL3cwNYLxy80Boebpl3s6qIuKM212OLfZ3p9ncfuDjGO2sV/KIZ7A45nF4ls7FzV0gm91gpidjFOHgQwsuPKiTEXVRyYsQTjto+SvyxGQYz0UMJNVj7oOv3lC5Jqeuch2W5u0c/cB/SPZGnKPRbqPKVH/hOEAvr67huiadcLj8G5GVZlHg+ss6vStrGfh86iozNLMBQMjWUDbt2fexGxCvmrn</ds:X509Certificate>
+            </ds:X509Data>
+         </ds:KeyInfo>
+      </md:KeyDescriptor>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://jaswindersingh-dev-ed.my.salesforce.com/idp/endpoint/HttpPost"/>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://jaswindersingh-dev-ed.my.salesforce.com/idp/endpoint/HttpRedirect"/>
+   </md:IDPSSODescriptor>
+</md:EntityDescriptor>

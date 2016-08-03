@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>IdEntry list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Assertionid</th>
+                <th>Entityid</th>
+                <th>Expirytime</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for idEntry in idEntries %}
+            <tr>
+                <td><a href="{{ path('identry_show', { 'id': idEntry.id }) }}">{{ idEntry.assertionId }}</a></td>
+                <td>{{ idEntry.entityId }}</td>
+                <td>{% if idEntry.expiryTime %}{{ idEntry.expiryTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ idEntry.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('identry_show', { 'id': idEntry.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('identry_edit', { 'id': idEntry.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('identry_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

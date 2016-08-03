@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>IdEntry</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Assertionid</th>
+                <td>{{ idEntry.assertionId }}</td>
+            </tr>
+            <tr>
+                <th>Entityid</th>
+                <td>{{ idEntry.entityId }}</td>
+            </tr>
+            <tr>
+                <th>Expirytime</th>
+                <td>{% if idEntry.expiryTime %}{{ idEntry.expiryTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ idEntry.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('identry_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('identry_edit', { 'id': idEntry.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

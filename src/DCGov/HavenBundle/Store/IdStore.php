@@ -1,8 +1,7 @@
 <?php
-// src/AppBundle/Store/IdStore.php
 namespace DCGov\HavenBundle\Store;
 
-use AppBundle\Entity\IdEntry;
+use DCGov\HavenBundle\Entity\IdEntry;
 use Doctrine\Common\Persistence\ObjectManager;
 use LightSaml\Provider\TimeProvider\TimeProviderInterface;
 use LightSaml\Store\Id\IdStoreInterface;
@@ -27,19 +26,19 @@ class IdStore implements IdStoreInterface
 
     /**
      * @param string    $entityId
-     * @param string    $id
+     * @param string    $assertionId
      * @param \DateTime $expiryTime
      *
      * @return void
      */
-    public function set($entityId, $id, \DateTime $expiryTime)
+    public function set($entityId, $assertionId, \DateTime $expiryTime)
     {
-        $idEntry = $this->manager->find(IdEntry::class, ['entityId'=>$entityId, 'id'=>$id]);
+		$idEntry = $this->manager->getRepository('DCGovHavenBundle:IdEntry')->findBy(['entityId'=>$entityId, 'assertionId'=>$assertionId]);
         if (null == $idEntry) {
             $idEntry = new IdEntry();
         }
         $idEntry->setEntityId($entityId)
-            ->setId($id)
+            ->setAssertionId($assertionId)
             ->setExpiryTime($expiryTime);
         $this->manager->persist($idEntry);
         $this->manager->flush($idEntry);
@@ -47,14 +46,14 @@ class IdStore implements IdStoreInterface
 
     /**
      * @param string $entityId
-     * @param string $id
+     * @param string $assertionId
      *
      * @return bool
      */
-    public function has($entityId, $id)
+    public function has($entityId, $assertionId)
     {
-        /** @var IdEntry $idEntry */
-        $idEntry = $this->manager->find(IdEntry::class, ['entityId'=>$entityId, 'id'=>$id]);
+        
+    	$idEntry =  $this->manager->getRepository('DCGovHavenBundle:IdEntry')->findBy(array('entityId' => $entityId, 'assertionId' => $assertionId));
         if (null == $idEntry) {
             return false;
         }

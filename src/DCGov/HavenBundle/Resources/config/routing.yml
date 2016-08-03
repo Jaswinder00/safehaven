@@ -3,23 +3,19 @@ dc_gov_haven_role:
     prefix:   /role
 
 login:
-    path: /login
+    path: /admin/login
     defaults: { _controller: "DCGovHavenBundle:Security:login" }
     
 login_check:
-    path: /login_check
+    path: /admin/login_check
 
 logout:
     path: /logout
-
-dc_gov_haven_login:
-    path:      /
-    defaults:  { _controller: "DCGovHavenBundle:Security:login" }    
-
+    
 dc_gov_haven_homepage:
-    path:     /safehaven
-    defaults: { _controller: "DCGovHavenBundle:Default:index" }
+    path:      /
+    defaults:  { _controller: "DCGovHavenBundle:Default:index" }
 
-dc_gov_haven_secure:
-    path:     /secure
-    defaults: { _controller: "DCGovHavenBundle:Default:secure" }    
+dc_gov_haven_identry:
+    resource: "@DCGovHavenBundle/Resources/config/routing/identry.yml"
+    prefix:   /identry

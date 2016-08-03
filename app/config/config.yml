@@ -169,15 +169,15 @@ light_saml_symfony_bridge:
         entity_id: http://jaswinder.dcmic.org/
         credentials:
             -
-                certificate: "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/saml.crt"
-                key:         "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/saml.key"
+                certificate: "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/public/saml/cert/saml.crt"
+                key:         "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/public/saml/cert/saml.key"
                 password:    ~
     party:
         idp:
             files:
                 - "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/openidp.feide.no.xml"
 #               - "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/testshib-providers.xml"
-                - "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/salesforce.samlidp.xml"
+                - "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/public/saml/sp/salesforce.samlidp.xml"
     store:
         id_state: id_store
 
