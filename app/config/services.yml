@@ -9,6 +9,11 @@ services:
       arguments:
           - "@=service('doctrine').getManager()"
           - "@lightsaml.system.time_provider"
+   user_creator:
+        class: DCGov\HavenBundle\Security\User\UserCreator
+        arguments:
+            - "@=service('doctrine').getManager()"
+            - "@lightsaml_sp.username_mapper.simple"
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

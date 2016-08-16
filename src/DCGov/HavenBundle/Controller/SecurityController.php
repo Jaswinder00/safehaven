@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SecurityController extends Controller
 {
 	/**
-	 * @Route("/login", name="login_route")
+	 * @Route("/admin/login", name="login_route")
 	 */
 	public function loginAction(Request $request)
 	{

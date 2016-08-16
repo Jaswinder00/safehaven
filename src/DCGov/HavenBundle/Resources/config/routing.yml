@@ -8,14 +8,19 @@ login:
     
 login_check:
     path: /admin/login_check
-
-logout:
-    path: /logout
     
 dc_gov_haven_homepage:
     path:      /
     defaults:  { _controller: "DCGovHavenBundle:Default:index" }
 
+haven_homepage:
+    path:      /safehaven
+    defaults:  { _controller: "DCGovHavenBundle:Default:index" }
+
 dc_gov_haven_identry:
     resource: "@DCGovHavenBundle/Resources/config/routing/identry.yml"
     prefix:   /identry
+
+dc_gov_haven_admin:
+    path:      /profile
+    defaults:  { _controller: "DCGovHavenBundle:Default:index" }

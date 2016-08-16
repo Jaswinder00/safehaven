@@ -3,11 +3,13 @@
 namespace DCGov\HavenBundle\Entity;
 
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable, EquatableInterface
 {
     /**
      * @var string
@@ -246,7 +248,7 @@ class User implements AdvancedUserInterface, \Serializable
     
     public function getRoles()
     {
-    	return array('ROLE_USER');
+    	return array($this->getRole()->getName());
     }
     
     public function eraseCredentials()
@@ -308,5 +310,26 @@ class User implements AdvancedUserInterface, \Serializable
     			// $this->salt
     			) = unserialize($serialized);
     }
+	/**
+	 * {@inheritDoc}
+	 * @see \Symfony\Component\Security\Core\User\EquatableInterface::isEqualTo()
+	 */
+	public function isEqualTo(UserInterface $user) {
+		if (!$user instanceof User) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->email !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
+
+	}
+
 }
 

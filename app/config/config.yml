@@ -166,18 +166,19 @@ swiftmailer:
 #Light SAML Bridge
 light_saml_symfony_bridge:
     own:
-        entity_id: http://jaswinder.dcmic.org/
+        entity_id: http://dev.haven.com/app_dev.php/saml/metadata.xml
         credentials:
             -
-                certificate: "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/public/saml/cert/saml.crt"
-                key:         "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/public/saml/cert/saml.key"
+                certificate: "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/config/saml/cert/saml.crt"
+                key:         "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/config/saml/cert/saml.key"
                 password:    ~
     party:
         idp:
             files:
                 - "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/openidp.feide.no.xml"
 #               - "%kernel.root_dir%/../vendor/lightsaml/lightsaml/web/sp/testshib-providers.xml"
-                - "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/public/saml/sp/salesforce.samlidp.xml"
+                - "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/config/saml/idp/salesforce.samlidp.xml"
+                - "%kernel.root_dir%/../src/DCGov/HavenBundle/Resources/config/saml/idp/idp.haven.xml"
     store:
         id_state: id_store
 
