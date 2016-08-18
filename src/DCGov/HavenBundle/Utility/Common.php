@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Common {
 	
+	const ID_PREFIX = 'row_';
+	
 	/**
 	 * Call this method to get current date and time in mm/dd/yyyy H:i:s format
 	 * @return date
@@ -37,15 +39,11 @@ class Common {
 		return $datetime->format($format);
 	}
 	
-	public static function isUserAuthenticated($class_ref) {
-		return $class_ref->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY');
-	}
-	
 	/*
 	 * Call this method to get Logged In User Object
 	 */
 	public static function getLoggedInUser($class_ref) {
-		if (!self::isUserAuthenticated($class_ref)) {
+		if (!$class_ref->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw $class_ref->createAccessDeniedException();
 		}
 		return $class_ref->get('security.token_storage')->getToken()->getUser();
@@ -60,6 +58,17 @@ class Common {
 		return $user->getFirstname()." ". $user->getLastname();
 	}
 	
+	//Call this function to ensure the user is fully authenticated 
+	public static function isUserAuthenticated($class_ref) {
+		return $class_ref->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY');
+	}
+	
+	/**
+	 * Call this method valid incoming request
+	 * @param Request $request
+	 * @param string $method
+	 * @throws NotFoundHttpException
+	 */
 	public static function checkRequest(Request $request, $method = "POST" ) {
 		if ($method !== $request->getMethod() || !$request->isXmlHttpRequest()) {
 			throw new NotFoundHttpException("Page not found");
@@ -86,6 +95,16 @@ class Common {
 		$json_value = json_encode($return_values);
 		
 		return $json_value;
+	}
+
+	/**
+	 * Call this method to generate a form Token
+	 * @param string $entityName
+	 * @return CsrfToken
+	 */
+	public static function createToken($class_ref, $entityName) {
+		$csrf = $class_ref->get('security.csrf.token_manager');
+		return $csrf->refreshToken($entityName);
 	}
 	
 }

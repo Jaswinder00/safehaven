@@ -35,12 +35,27 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
      * @var boolean
      */
     private $isactive = '1';
-
+	
     /**
      * @var \DateTime
      */
     private $createdTimestamp = 'CURRENT_TIMESTAMP';
-
+    
+    /**
+     * @var string
+     */
+    private $createdBy;
+    
+    /**
+     * @var string
+     */
+    private $modifiedBy;
+    
+    /**
+     * @var \DateTime
+     */
+    private $modifiedTimestamp = 'CURRENT_TIMESTAMP';
+    
     /**
      * @var integer
      */
@@ -195,6 +210,75 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     {
         return $this->createdTimestamp;
     }
+    
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return User
+     */
+    public function setCreatedBy($createdBy)
+    {
+    	$this->createdBy = $createdBy;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get createdBy
+     *
+     * @return string
+     */
+    public function getCreatedBy()
+    {
+    	return $this->createdBy;
+    }
+    
+    /**
+     * Set modifiedBy
+     *
+     * @param string $modifiedBy
+     * @return User
+     */
+    public function setModifiedBy($modifiedBy)
+    {
+    	$this->modifiedBy = $modifiedBy;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get modifiedBy
+     *
+     * @return string
+     */
+    public function getModifiedBy()
+    {
+    	return $this->modifiedBy;
+    }
+    
+    /**
+     * Set modifiedTimestamp
+     *
+     * @param \DateTime $modifiedTimestamp
+     * @return User
+     */
+    public function setModifiedTimestamp($modifiedTimestamp)
+    {
+    	$this->modifiedTimestamp = $modifiedTimestamp;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get modifiedTimestamp
+     *
+     * @return \DateTime
+     */
+    public function getModifiedTimestamp()
+    {
+    	return $this->modifiedTimestamp;
+    }
 
     /**
      * Get id
@@ -310,6 +394,7 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     			// $this->salt
     			) = unserialize($serialized);
     }
+    
 	/**
 	 * {@inheritDoc}
 	 * @see \Symfony\Component\Security\Core\User\EquatableInterface::isEqualTo()

@@ -36,7 +36,22 @@
         <option name="default">1</option>
       </options>
     </field>
-    <field name="createdTimestamp" type="datetime" column="created_timestamp" nullable="true">
+    <field name="modifiedBy" type="string" column="modified_by" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="modifiedTimestamp" type="datetime" column="modified_timestamp" nullable="true">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="createdBy" type="string" column="created_by" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="createdTimestamp" type="datetime" column="created_timestamp" nullable="false">
       <options>
         <option name="default">CURRENT_TIMESTAMP</option>
       </options>
