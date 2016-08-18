@@ -8,26 +8,31 @@
 	<div class="container" id="login-form-container">
 		<form class="form-signin" id="login-form"
 			action="{{ path('login_check') }}" method="POST">
-			<h2 class="form-signin-heading col-sm-11">Log In</h2>
+			<h2 class="form-signin-heading col-xs-11 col-md-11">Login</h2>
 			
-			<label for="email" class="sr-only">Email address</label>
-			<div class="col-sm-11">
-				<input id="email" class="form-control" name="_username" type="email" placeholder="Email Address" value="{{ last_username }}" required autofocus />
+			<div class="col-xs-11 col-md-11 margin-top-1em">
+				<label for="_username" class="">Username</label>	
+				<input id="email" class="form-control" name="_username" type="email" placeholder="Username" value="{{ last_username }}" required autofocus />
 				<i class="fa fa-user form-control-feedback"></i>
 			</div>
-			<label for="password" class="sr-only">Password</label>
-			<div class="col-sm-11">
+			
+			<div class="col-xs-11 col-md-11 margin-top-1em">
+				<label for="_password" class="">Password</label>
+
 				<input id = "password" class="form-control" name="_password" type="password" placeholder="Password" required />
 				<i class="fa fa-user form-control-feedback"></i>
 			</div> 
 							
-			<div class="checkbox col-sm-11">
+			<div class="checkbox col-xs-11 col-md-11">
                 <label>
                 	<input type="checkbox" value="remember-me"> Remember me
               	</label>
+              	<label for="" class="pull-right">
+					<a href="forgot-password.html" >Fotgot Password ?</a>
+				</label>
         	</div>
-			<div class="col-sm-11">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<div class="col-xs-11 col-md-11">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">LOGIN</button>
 			</div>
 
 		</form>

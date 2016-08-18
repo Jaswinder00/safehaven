@@ -46,8 +46,8 @@ security:
                 default_target_path: /safehaven
           
             form_login:
-                login_path: /admin/login
-                check_path: /admin/login_check
+                login_path: /login
+                check_path: /login_check
                 default_target_path: /
                 remember_me: true
             logout:
@@ -63,7 +63,7 @@ security:
             
     access_control:
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }   
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }   
 #        - { path: ^/saml/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^(.*)/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
