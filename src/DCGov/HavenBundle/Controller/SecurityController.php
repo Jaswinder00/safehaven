@@ -39,4 +39,12 @@ class SecurityController extends Controller
 		throw new \Exception('This should never be reached!');
 	}
 	
+	public function passwordResetAction(Request $request) {
+		return $this->render('DCGovHavenBundle:Security:password-reset.html.twig');
+	}
+	
+	public function passwordSuccessAction(Request $request) {
+		return $this->render('DCGovHavenBundle:Security:password-success.html.twig');
+	}
+	
 }

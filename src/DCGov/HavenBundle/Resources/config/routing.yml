@@ -8,7 +8,15 @@ login:
     
 login_check:
     path: /login_check
+
+password_reset:
+    path: /password_reset
+    defaults: { _controller: "DCGovHavenBundle:Security:passwordReset" }
     
+password_success:
+    path: /password_success
+    defaults: { _controller: "DCGovHavenBundle:Security:passwordSuccess" }
+        
 dc_gov_haven_homepage:
     path:      /
     defaults:  { _controller: "DCGovHavenBundle:Default:index" }
