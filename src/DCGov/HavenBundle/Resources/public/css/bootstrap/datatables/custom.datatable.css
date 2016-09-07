@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+/*Make the datatable rows highlight when mouse is over*/
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+  background-color: #f6f6f6;
+}
+table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
+  background-color: #aab7d1;
+}
+
+#tblCenterEconomicsHistory.dataTable.display tbody tr:hover {
+ cursor: pointer;	
+}
+
+/*Make the datatable editable columns appear more user friendly*/
+.table-bordered>tbody>tr>td.editable {
+  color: #0088cc;
+  text-decoration: none;
+  
+}
+.table-bordered>tbody>tr>td.editable:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #0062A6; /*darken by 15% */
+}
+
+#DTE_Field_marketrentsource {
+	width: 100%;
+}

@@ -12,16 +12,31 @@
 	    	{% endblock header %}
     	</header>
     	
-        {% block body %}
-        	{% include 'DCGovHavenBundle::sidemenu.html.twig' %}
-        {% endblock %}
+    	{% block navigation %}
+    		<!-- Check if user is authenticated -->
+            {% if app.user %}
+                {% include 'DCGovHavenBundle::navigation.html.twig' %}
+            {% endif %}
+    	
+         {% endblock navigation %}
+    	
+    	<!-- Main Body Contents -->
+    	<div class="main">
+				<div class="panel panel-default">
+					<div class="panel-body">
+                        {% block body %}
+                             
+                             
+                        {% endblock %}
+        			</div>
+        		</div>
+        </div>
         
-        <footer>
+        <footer class="footer">
 	        {% block footer %}
 	        	{% include 'DCGovHavenBundle::footer.html.twig' %}
 	        {% endblock %}
 	    </footer>
-	    
-	    
+
     </body>
 </html>

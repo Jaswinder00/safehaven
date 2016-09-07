@@ -14,6 +14,11 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     /**
      * @var string
      */
+    private $username;
+
+    /**
+     * @var string
+     */
     private $email;
 
     /**
@@ -35,27 +40,27 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
      * @var boolean
      */
     private $isactive = '1';
-	
-    /**
-     * @var \DateTime
-     */
-    private $createdTimestamp = 'CURRENT_TIMESTAMP';
-    
-    /**
-     * @var string
-     */
-    private $createdBy;
-    
+
     /**
      * @var string
      */
     private $modifiedBy;
-    
+
     /**
      * @var \DateTime
      */
     private $modifiedTimestamp = 'CURRENT_TIMESTAMP';
-    
+
+    /**
+     * @var string
+     */
+    private $createdBy;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdTimestamp = 'CURRENT_TIMESTAMP';
+
     /**
      * @var integer
      */
@@ -66,6 +71,30 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
      */
     private $role;
 
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
     /**
      * Set email
@@ -188,6 +217,78 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     }
 
     /**
+     * Set modifiedBy
+     *
+     * @param string $modifiedBy
+     *
+     * @return User
+     */
+    public function setModifiedBy($modifiedBy)
+    {
+        $this->modifiedBy = $modifiedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get modifiedBy
+     *
+     * @return string
+     */
+    public function getModifiedBy()
+    {
+        return $this->modifiedBy;
+    }
+
+    /**
+     * Set modifiedTimestamp
+     *
+     * @param \DateTime $modifiedTimestamp
+     *
+     * @return User
+     */
+    public function setModifiedTimestamp($modifiedTimestamp)
+    {
+        $this->modifiedTimestamp = $modifiedTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get modifiedTimestamp
+     *
+     * @return \DateTime
+     */
+    public function getModifiedTimestamp()
+    {
+        return $this->modifiedTimestamp;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     *
+     * @return User
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
      * Set createdTimestamp
      *
      * @param \DateTime $createdTimestamp
@@ -209,75 +310,6 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     public function getCreatedTimestamp()
     {
         return $this->createdTimestamp;
-    }
-    
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return User
-     */
-    public function setCreatedBy($createdBy)
-    {
-    	$this->createdBy = $createdBy;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get createdBy
-     *
-     * @return string
-     */
-    public function getCreatedBy()
-    {
-    	return $this->createdBy;
-    }
-    
-    /**
-     * Set modifiedBy
-     *
-     * @param string $modifiedBy
-     * @return User
-     */
-    public function setModifiedBy($modifiedBy)
-    {
-    	$this->modifiedBy = $modifiedBy;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get modifiedBy
-     *
-     * @return string
-     */
-    public function getModifiedBy()
-    {
-    	return $this->modifiedBy;
-    }
-    
-    /**
-     * Set modifiedTimestamp
-     *
-     * @param \DateTime $modifiedTimestamp
-     * @return User
-     */
-    public function setModifiedTimestamp($modifiedTimestamp)
-    {
-    	$this->modifiedTimestamp = $modifiedTimestamp;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get modifiedTimestamp
-     *
-     * @return \DateTime
-     */
-    public function getModifiedTimestamp()
-    {
-    	return $this->modifiedTimestamp;
     }
 
     /**
@@ -314,22 +346,12 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
         return $this->role;
     }
     
-	///////////////////////////////////////////////////////////////////////
-	//
+    ///////////////////////////////////////////////////////////////////////
+    //
     //Implement Interface methods
     //
     ///////////////////////////////////////////////////////////////////////
-    
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-    	return $this->email;
-    }
-    
+ 
     public function getRoles()
     {
     	return array($this->getRole()->getName());
@@ -374,6 +396,7 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     {
     	return serialize(array(
     			$this->id,
+    			$this->username,
     			$this->email,
     			$this->password,
     			// see section on salt below
@@ -388,6 +411,7 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     {
     	list (
     			$this->id,
+    			$this->username,
     			$this->email,
     			$this->password,
     			// see section on salt below
@@ -395,26 +419,22 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     			) = unserialize($serialized);
     }
     
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Security\Core\User\EquatableInterface::isEqualTo()
-	 */
-	public function isEqualTo(UserInterface $user) {
-		if (!$user instanceof User) {
-            return false;
-        }
-
-        if ($this->password !== $user->getPassword()) {
-            return false;
-        }
-
-        if ($this->email !== $user->getUsername()) {
-            return false;
-        }
-
-        return true;
-
-	}
-
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\EquatableInterface::isEqualTo()
+     */
+    public function isEqualTo(UserInterface $user) {
+    	if (!$user instanceof User) {
+    		return false;
+    	}
+    	if ($this->password !== $user->getPassword()) {
+    		return false;
+    	}
+    	if ($this->username !== $user->getUsername()) {
+    		return false;
+    	}
+    	return true;
+    }
+    
 }
 

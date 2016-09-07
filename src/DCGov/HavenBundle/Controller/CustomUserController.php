@@ -30,7 +30,7 @@ class CustomUserController extends UserController
 	
 		$em = $this->getDoctrine()->getManager();
 	
-		$entities = $em->getRepository('GapToolsBundle:User')->findAll();
+		$entities = $em->getRepository('DCGovHavenBundle:User')->findAll();
 	
 		$json = '{"draw": 1,
          "recordsTotal":'.count($entities).',
@@ -40,6 +40,7 @@ class CustomUserController extends UserController
 		foreach ($entities as $entity) {
 	
 			$json .= '{ "DT_RowId":"'.Common::ID_PREFIX . $entity->getId() .
+			'","username":"'.$entity->getUsername().
 			'","email":"'.$entity->getEmail().
 			'","firstname":"'.$entity->getFirstname().
 			'","lastname":"'.$entity->getLastname().
@@ -75,7 +76,7 @@ class CustomUserController extends UserController
 	
 		} elseif ("remove" == $post_action) {	//Remove
 			$common = new CommonController($this->container);
-			$common->removeEntity($userid, 'GapToolsBundle:User');
+			$common->removeEntity($userid, 'DCGovHavenBundle:User');
 			$json = '{ "data": [] }';
 	
 		} elseif ("create" == $post_action) {	//New
@@ -95,7 +96,8 @@ class CustomUserController extends UserController
 		$em = $this->getDoctrine()->getManager();
 		$user = new User();
 		$userid = 0;
-	
+		
+		$user->setUsername($post_data[$userid]["username"]);
 		$user->setEmail($post_data[$userid]["email"]);
 		$user->setFirstname($post_data[$userid]["firstname"]);
 		$user->setLastname($post_data[$userid]["lastname"]);
@@ -127,48 +129,51 @@ class CustomUserController extends UserController
 	private function updateUser($post_data,$userid) {
 	
 		$em = $this->getDoctrine()->getManager();
-		$user = $em->getRepository('GapToolsBundle:User')->find($userid);
+		$user = $em->getRepository('DCGovHavenBundle:User')->find($userid);
 	
 		if (!$user) {
 			throw $this->createNotFoundException('Unable to find Report entity.');
 		}
 	
 	
+		if(isset($post_data[Common::ID_PREFIX.$userid]["username"]))
+			$user->setEmail($post_data[Common::ID_PREFIX.$userid]["username"]);
+		
 		if(isset($post_data[Common::ID_PREFIX.$userid]["email"]))
 			$user->setEmail($post_data[Common::ID_PREFIX.$userid]["email"]);
 	
-			if(isset($post_data[Common::ID_PREFIX.$userid]["firstname"]))
-				$user->setFirstname($post_data[Common::ID_PREFIX.$userid]["firstname"]);
+		if(isset($post_data[Common::ID_PREFIX.$userid]["firstname"]))
+			$user->setFirstname($post_data[Common::ID_PREFIX.$userid]["firstname"]);
 	
-				if(isset($post_data[Common::ID_PREFIX.$userid]["lastname"]))
-					$user->setLastname($post_data[Common::ID_PREFIX.$userid]["lastname"]);
-						
-					// Set Password
-					if (isset ( $post_data [Common::ID_PREFIX . $userid] ["password"] )) {
-						$plainPassword = $post_data [Common::ID_PREFIX . $userid] ["password"];
-							
-						if(self::PASSWORD_MASK !== $plainPassword) {
-							$user->setPassword( $this->encryptPassword($plainPassword) );
-						}
-					}
+		if(isset($post_data[Common::ID_PREFIX.$userid]["lastname"]))
+			$user->setLastname($post_data[Common::ID_PREFIX.$userid]["lastname"]);
+				
+		// Set Password
+		if (isset ( $post_data [Common::ID_PREFIX . $userid] ["password"] )) {
+			$plainPassword = $post_data [Common::ID_PREFIX . $userid] ["password"];
+				
+			if(self::PASSWORD_MASK !== $plainPassword) {
+				$user->setPassword( $this->encryptPassword($plainPassword) );
+			}
+		}
 	
-					// Set Role
-					if (isset ( $post_data [Common::ID_PREFIX . $userid] ["role"] )) {
-						$role_name = $post_data [Common::ID_PREFIX . $userid] ["role"];
-						$role = $this->getUserRoleInstance($role_name);
-						$user->setRole( $role );
-					}
+		// Set Role
+		if (isset ( $post_data [Common::ID_PREFIX . $userid] ["role"] )) {
+			$role_name = $post_data [Common::ID_PREFIX . $userid] ["role"];
+			$role = $this->getUserRoleInstance($role_name);
+			$user->setRole( $role );
+		}
 	
-					if (isset ( $post_data [Common::ID_PREFIX . $userid] ["isactive"] ))
-						$user->setIsactive( ( int ) $post_data [Common::ID_PREFIX . $userid] ["isactive"] );
-	
-						$user->setModifiedBy( Common::getLoggedInUsername ( $this ) );
-						$user->setModifiedTimestamp( new \DateTime ( "now" ) );
-	
-						$em->persist( $user );
-						$em->flush();
-	
-						return $this->createJSon($user);
+		if (isset ( $post_data [Common::ID_PREFIX . $userid] ["isactive"] ))
+			$user->setIsactive( ( int ) $post_data [Common::ID_PREFIX . $userid] ["isactive"] );
+
+		$user->setModifiedBy( Common::getLoggedInUsername ( $this ) );
+		$user->setModifiedTimestamp( new \DateTime ( "now" ) );
+
+		$em->persist( $user );
+		$em->flush();
+
+		return $this->createJSon($user);
 	
 	}
 	
@@ -186,19 +191,19 @@ class CustomUserController extends UserController
 	}
 	
 	/**
-	 * Call this method to the the User Rol based on the Name provided
+	 * Call this method to the the User Role based on the Name provided
 	 * @param string $role_name
 	 * @return Role
 	 */
 	private function getUserRoleInstance($role_name) {
 		$em = $this->getDoctrine()->getManager();
-		$role = $em->getRepository ( 'GapToolsBundle:Role' )->findByName ( $role_name )[0];
+		$role = $em->getRepository ( 'DCGovHavenBundle:Role' )->findByName ( $role_name )[0];
 		if ($role) {
 			return $role;
 		}
 	
 		//Default
-		return $em->getRepository ( 'GapToolsBundle:Role' )->findByName ( "ROLE_USER" )[0];
+		return $em->getRepository ( 'DCGovHavenBundle:Role' )->findByName ( "ROLE_USER" )[0];
 	}
 	
 	/**
@@ -210,6 +215,7 @@ class CustomUserController extends UserController
 	
 		$json = '{ "data": [ '.
 				'{ "DT_RowId":"'.Common::ID_PREFIX . $user->getId() .
+				'","username":"'.$user->getUsername().
 				'","email":"'.$user->getEmail().
 				'","firstname":"'.$user->getFirstname().
 				'","lastname":"'.$user->getLastname().
@@ -219,5 +225,40 @@ class CustomUserController extends UserController
 				'" } ] , "options": [], "files": [] }';
 	
 		return $json;
+	}
+	
+	/**
+	 * Call this method to know if the user exists in the database by UserName
+	 * @param array $parameters_array - e.g. array('username' => $username) 
+	 */
+	public function findUser($parameters_array) {
+		$em = $this->getDoctrine()->getManager();
+		
+		return $em->getRepository('DCGovHavenBundle:User')->findOneBy($parameters_array);
+	}
+	
+	/**
+	 * Call this method to update user password
+	 * @param integer $userid
+	 * @param string $newpassword
+	 * @return boolean
+	 */
+	public function updatePassword($userid, $newpassword) {
+		
+		$em = $this->getDoctrine()->getManager();
+		$user = $em->getRepository('DCGovHavenBundle:User')->find($userid);
+		
+		if (!$user) {
+			$logger = $this->get('logger');
+			$logger->error('Unable to find a User: '.$userid);
+			return false;
+		}
+		
+		$user->setPassword( $this->encryptPassword($newpassword) );
+		
+		$em->persist( $user );
+		$em->flush();
+		
+		return true;
 	}
 }

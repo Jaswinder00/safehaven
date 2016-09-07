@@ -1,0 +1,12 @@
+report_index:
+    path:     /
+    defaults: { _controller: "DCGovHavenBundle:Report:index" }
+    methods:  GET
+
+report_show:
+    path:     /{id}/show
+    defaults: { _controller: "DCGovHavenBundle:Report:show" }
+    methods:  GET
+
+
+

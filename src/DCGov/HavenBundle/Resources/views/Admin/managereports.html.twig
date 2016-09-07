@@ -1,0 +1,48 @@
+{% set page_title = 'Manage Reports' %}
+
+{% extends 'DCGovHavenBundle::base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	
+	<div class="main">
+	    <h4 class="sub-header">{{ page_title }}</h4>
+	    <br>
+	    <div class="table-responsive">
+	        <table id="tblReports" class="table table-striped display" cellspacing="0" width="100%">
+	            <thead>
+	                <tr>
+	                	<th></th>
+	                    <th>Report Name</th>
+	                    <th>Display Name</th>
+	                    <th>SQL Query</th>
+	                    <th>IsActive</th>
+	                </tr>
+	            </thead>
+	            <tfoot>
+	                <tr>
+	                	<th></th>
+	                    <th>Report Name</th>
+	                    <th>Display Name</th>
+	                    <th>SQL Query</th>
+	                    <th>IsActive</th>
+	                </tr>
+	            </tfoot>
+	
+	        </table>
+	    </div>
+	    
+    </div>
+    
+{% endblock body %}
+
+{% block footer %}
+	{{ parent() }}
+	
+    
+     {% javascripts '@DCGovHavenBundle/Resources/public/js/admin.js' %}
+     
+     	<script src="{{ asset_url }}" defer></script>
+     {% endjavascripts %}
+     
+{% endblock footer %}

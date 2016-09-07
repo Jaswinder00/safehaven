@@ -1,0 +1,22 @@
+login:
+    path: /
+    defaults: { _controller: "DCGovHavenBundle:Security:login" }
+    
+login_check:
+    path: /login_check
+
+password_reset:
+    path: /password_reset
+    defaults: { _controller: "DCGovHavenBundle:Security:passwordReset" }
+    
+password_reset_submit:
+    path: /password_reset_submit
+    defaults: { _controller: "DCGovHavenBundle:Security:passwordSubmit" }
+
+password_reset_link:
+    path: /password_reset_link
+    defaults: { _controller: "DCGovHavenBundle:Security:passwordResetLink" }
+
+password_change_submit:
+    path: /password_change_submit
+    defaults: { _controller: "DCGovHavenBundle:Security:passwordChangeSubmit" }    

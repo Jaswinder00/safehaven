@@ -1,0 +1,35 @@
+dc_gov_haven_admin_home:
+    path: /
+    defaults: { _controller: "DCGovHavenBundle:Admin:index" }
+
+dc_gov_haven_admin_manageusers:
+    path:      /manageusers
+    defaults:  { _controller: "DCGovHavenBundle:Admin:manageUsers" }
+
+dc_gov_haven_admin_managereports:
+    path:      /managereports
+    defaults:  { _controller: "DCGovHavenBundle:Admin:manageReports" }
+
+dc_gov_haven_admin_reports:
+    path:     /reports
+    defaults: { _controller: "DCGovHavenBundle:Admin:getReports" }
+
+dc_gov_haven_admin_reports_save:
+    path:     /reports/save
+    defaults: { _controller: "DCGovHavenBundle:Admin:saveReport" }
+
+dc_gov_haven_admin_managereport_settings:
+    path:     /managereport/settings
+    defaults: { _controller: "DCGovHavenBundle:Admin:manageReportSettings" }
+
+dc_gov_haven_admin_report_settings_save:
+    path:     /savereportsettings
+    defaults: { _controller: "DCGovHavenBundle:Admin:saveReportSettings" }
+
+dc_gov_haven_admin_manageusers_users:
+    path:     /users
+    defaults: { _controller: "DCGovHavenBundle:Admin:getUsers" }
+
+dc_gov_haven_admin_manageusers_save:
+    path:     /manageusers/save
+    defaults: { _controller: "DCGovHavenBundle:Admin:saveUser" }    
