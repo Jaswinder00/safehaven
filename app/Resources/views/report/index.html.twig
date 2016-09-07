@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Report list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Header</th>
+                <th>Sqlstatement</th>
+                <th>Settings</th>
+                <th>Isactive</th>
+                <th>Modifiedby</th>
+                <th>Modifiedtimestamp</th>
+                <th>Createdtimestamp</th>
+                <th>Createdby</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <td><a href="{{ path('report_show', { 'id': report.id }) }}">{{ report.name }}</a></td>
+                <td>{{ report.header }}</td>
+                <td>{{ report.sqlStatement }}</td>
+                <td>{{ report.settings }}</td>
+                <td>{% if report.isactive %}Yes{% else %}No{% endif %}</td>
+                <td>{{ report.modifiedBy }}</td>
+                <td>{% if report.modifiedTimestamp %}{{ report.modifiedTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if report.createdTimestamp %}{{ report.createdTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ report.createdBy }}</td>
+                <td>{{ report.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('report_show', { 'id': report.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

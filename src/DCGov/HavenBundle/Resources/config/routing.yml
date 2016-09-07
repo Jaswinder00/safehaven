@@ -1,34 +1,23 @@
+dc_gov_haven_home:
+    path:      /
+    defaults:  { _controller: "DCGovHavenBundle:Default:index" }
+
 dc_gov_haven_role:
     resource: "@DCGovHavenBundle/Resources/config/routing/role.yml"
     prefix:   /role
 
-login:
-    path: /login
-    defaults: { _controller: "DCGovHavenBundle:Security:login" }
-    
-login_check:
-    path: /login_check
+dc_gov_haven_login:
+    resource: "@DCGovHavenBundle/Resources/config/routing/login.yml"
+    prefix:   /login
 
-password_reset:
-    path: /password_reset
-    defaults: { _controller: "DCGovHavenBundle:Security:passwordReset" }
-    
-password_success:
-    path: /password_success
-    defaults: { _controller: "DCGovHavenBundle:Security:passwordSuccess" }
-        
-dc_gov_haven_homepage:
-    path:      /
-    defaults:  { _controller: "DCGovHavenBundle:Default:index" }
-
-haven_homepage:
-    path:      /safehaven
-    defaults:  { _controller: "DCGovHavenBundle:Default:index" }
+dc_gov_haven_admin:
+    resource: "@DCGovHavenBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
 
 dc_gov_haven_identry:
     resource: "@DCGovHavenBundle/Resources/config/routing/identry.yml"
     prefix:   /identry
 
-dc_gov_haven_admin:
-    path:      /profile
-    defaults:  { _controller: "DCGovHavenBundle:Default:index" }
+dc_gov_haven_report:
+        resource: "@DCGovHavenBundle/Resources/config/routing/report.yml"
+        prefix:   /report    

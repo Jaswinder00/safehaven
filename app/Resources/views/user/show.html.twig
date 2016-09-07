@@ -6,6 +6,10 @@
     <table>
         <tbody>
             <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
@@ -24,6 +28,18 @@
             <tr>
                 <th>Isactive</th>
                 <td>{% if user.isactive %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Modifiedby</th>
+                <td>{{ user.modifiedBy }}</td>
+            </tr>
+            <tr>
+                <th>Modifiedtimestamp</th>
+                <td>{% if user.modifiedTimestamp %}{{ user.modifiedTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ user.createdBy }}</td>
             </tr>
             <tr>
                 <th>Createdtimestamp</th>

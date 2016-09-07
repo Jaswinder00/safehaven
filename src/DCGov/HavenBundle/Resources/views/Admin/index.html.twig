@@ -1,0 +1,17 @@
+{% set page_title = 'Administrative Panel' %}
+
+{% extends 'DCGovHavenBundle::base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	
+	<div class="col-sm-9 col-sm-offset-3 main">
+	    <h4 class="sub-header">{{ page_title }}</h4>
+	    <br>
+	    <span class="alert alert-info">You must be an authorized user to access this page of the site.</span>
+	    
+    </div>
+    
+{% endblock body %}
+
+

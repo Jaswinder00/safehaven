@@ -1,0 +1,54 @@
+{% set page_title = 'Manage Users' %}
+
+{% extends 'DCGovHavenBundle::base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	
+	<div class="main">
+	    <h4 class="sub-header">{{ page_title }}</h4>
+	    <br>
+	    <div class="table-responsive">
+	        <table id="tblUsers" class="table table-striped display" cellspacing="0" width="100%">
+	            <thead>
+	                <tr>
+	                	<th></th>
+	                    <th>Username</th>
+	                    <th>Email</th>
+	                    <th>First Name</th>
+	                    <th>Last Name</th>
+	                    <th>Password</th>
+	                    <th>User Role</th>
+	                    <th>IsActive</th>
+	                </tr>
+	            </thead>
+	            <tfoot>
+	                <tr>
+	                	<th></th>
+	                	<th>Username</th>
+	                    <th>Email</th>
+	                    <th>First Name</th>
+	                    <th>Last Name</th>
+	                    <th>Password</th>
+	                    <th>User Role</th>
+	                    <th>IsActive</th>
+	                </tr>
+	            </tfoot>
+	
+	        </table>
+	    </div>
+	    
+    </div>
+    
+{% endblock body %}
+
+{% block footer %}
+	{{ parent() }}
+	
+    
+     {% javascripts '@DCGovHavenBundle/Resources/public/js/admin.js' %}
+     
+     	<script src="{{ asset_url }}" defer></script>
+     {% endjavascripts %}
+     
+{% endblock footer %}

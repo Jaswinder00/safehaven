@@ -1,9 +1,585 @@
 {% extends 'DCGovHavenBundle::base.html.twig' %}
 
+
+{% set current_month = "now"|date("m") %}
+{% set current_day = "now"|date("d") %}
+{% set current_year = "now"|date("Y") %}
+
 {% block body %}
-	{{ parent() }}
-	<div class="col-sm-9 main">
-        <h3 class="sub-header">Welcome to the District's Safe Haven Portal</h3>  
-    	
-    </div>
+{{ parent() }}
+
+<form class="form-horizontal" id="frmApplication" action="#">
+	<div class="col-xs-12 col-md-12">
+
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="applicationName" class="col-md-6 control-label">*Application Name:</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="applicationName"
+							placeholder="Application Name" required/>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="applicationDate" class="col-md-5 control-label">Application
+						Date:</label>
+					<div class="col-md-7 form-inline">
+						<select name="application_month" id="application_month"
+							title="Month" class="form-control">
+							<option value="0" selected="1">Month</option>
+							<option value="1">Jan</option>
+							<option value="2">Feb</option>
+							<option value="3">Mar</option>
+							<option value="4">Apr</option>
+							<option value="5">May</option>
+							<option value="6">Jun</option>
+							<option value="7">Jul</option>
+							<option value="8">Aug</option>
+							<option value="9">Sep</option>
+							<option value="10">Oct</option>
+							<option value="11">Nov</option>
+							<option value="12">Dec</option>
+						</select> / <select name="application_day" id="application_day"
+							class="form-control">
+							<option value="">Day</option>
+							{% for day in 1..31 %}
+							{% if day == current_day %}
+							<option value="{{ day }}" selected>{{ day }}</option>
+							{% else %}
+							<option value="{{ day }}">{{ day }}</option>
+							{% endif %}
+							{% endfor %}
+						</select> / <select name="application_year" id="application_year"
+							class="form-control">
+							<option value="">Year</option>
+							{% for year in (current_year-3)..current_year %}
+							{% if year == current_year %}
+							<option value="{{ year }}" selected>{{ year }}</option>
+							{% else %}
+							<option value="{{ year }}">{{ year }}</option>
+							{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="test-app-chk">Test
+						App?:</label>
+					<div class="col-md-7">
+						<input type="checkbox" id="test-app-chk">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- first row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="ICNumber" class="col-md-6 control-label">IC
+						Number:</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="ICNumber"
+							placeholder="IC Number" />
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="clsNumber" class="col-md-5 control-label">CLS
+						Number:</label>
+					<div class="col-md-7">
+						<input type="text" class="form-control" id="clsNumber"
+							placeholder="CLS Number" />
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="requestType" class="col-md-5 control-label">Request
+						Type:</label>
+					<div class="col-md-7 form-inline">
+						<select class="form-control">
+							<option value="jan">Data 1</option>
+							<option value="jan">Data 2</option>
+							<option value="jan">Data 2</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- second row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-8">
+				<div class="form-group">
+					<label for="comments" class="col-md-3 control-label">Comments:</label>
+					<div class="col-md-9">
+						<textarea class="form-control" id="comments"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="firstName" class="col-md-6 control-label">*First
+						Name:</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="firstName"
+							placeholder="First Name" required>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="lastName" class="col-md-5 control-label">*Last
+						Name:</label>
+					<div class="col-md-7">
+						<input type="text" class="form-control" id="lastName"
+							placeholder="Last Name" required>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="dateOfBirth" class="col-md-5 control-label">*DOB:</label>
+					<div class="col-md-7 form-inline">
+						<select name="dob_month" id="dob_month" title="Month"
+							class="form-control" required>
+							<option value="0" selected="1">Month</option>
+							<option value="1">Jan</option>
+							<option value="2">Feb</option>
+							<option value="3">Mar</option>
+							<option value="4">Apr</option>
+							<option value="5">May</option>
+							<option value="6">Jun</option>
+							<option value="7">Jul</option>
+							<option value="8">Aug</option>
+							<option value="9">Sep</option>
+							<option value="10">Oct</option>
+							<option value="11">Nov</option>
+							<option value="12">Dec</option>
+						</select> / <select name="dob_day" id="dob_day" class="form-control">
+							<option value="">Day</option>
+							{% for day in 1..31 %}
+							<option value="{{ day }}">{{ day }}</option>
+							{% endfor %}
+						</select> / <select name="dob_year" id="dob_year" class="form-control">
+							<option value="">Year</option>
+							{% for year in 1900..current_year %}
+							<option value="{{ year }}">{{ year }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="age" class="col-md-6 control-label">Age:</label>
+					<div class="col-md-6">
+						<span>31</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="gender" class="col-md-5 control-label">Gender:</label>
+					<div class="col-md-7 form-inline">
+						<select class="form-control">
+							<option value="jan">Gender</option>
+							<option value="jan">Male</option>
+							<option value="jan">Female</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="ssn" class="col-md-5 control-label">SSN:</label>
+					<div class="col-md-7">
+						<input type="text" class="form-control" id="ssn"
+							placeholder="SSN">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="street" class="col-md-6 control-label">Address:</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="street"
+							placeholder="Street">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="city" class="col-md-5 control-label">City:</label>
+					<div class="col-md-7">
+						<input type="text" class="form-control" id="city"
+							placeholder="City">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="state" class="col-md-5 control-label">*State:</label>
+					<div class="col-md-7 form-inline">
+						<select class="form-control" id="state-select">
+							<option value="">State</option>
+							<option value="dc" selected>DC</option>
+							<option value="md">MD</option>
+							<option value="va">VA</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row hidden" id="toggle-on-state">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="col-md-5">
+							<input type="checkbox" id="temp-out-state-chk">
+						</div>
+						<label class="col-md-7" for="temp-out-state-chk">
+							Temporarily out of state: </label>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<div class="col-md-12">
+
+						<div class="col-md-5">
+							<input type="checkbox" id="no-address-chk">
+						</div>
+						<label class="col-md-7" for="no-address-chk">No Fixed
+							Address:</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-6 control-label" for="apply-insurance-chk">Is
+						this person applying for insurance?</label>
+					<div class="col-md-6 ">
+						<input type="checkbox" id="apply-insurance-chk">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="student-chk">Student?</label>
+					<div class="col-md-7">
+						<input type="checkbox" id="student-chk">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="blind-chk">Blind,
+						disabled, needs long-term care?</label>
+					<div class="col-md-7">
+						<input type="checkbox" id="blind-chk">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-6 control-label" for="care-chk">Claimed
+						as dependent by someone not on this application?</label>
+					<div class="col-md-6">
+						<input type="checkbox" id="care-chk">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div id="toggle-on-claimed-chkbox" class="form-group ">
+					<label class="col-md-5 control-label" for="claimer-chk">Claimer
+						lives out of state?</label>
+					<div class="col-md-7">
+						<input type="checkbox" id="claimer-chk" disabled>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-6 control-label" for="eligible-chk">Eligible
+						for other insurance?</label>
+					<div class="col-md-6">
+						<input type="checkbox" id="eligible-chk">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="endDate" class="col-md-5 control-label">Other
+						Insurance end date:</label>
+					<div class="col-md-7 form-inline">
+						<select class="form-control">
+							<option value="jan">Jan</option>
+							<option value="jan">Feb</option>
+							<option value="jan">Mar</option>
+						</select> / <select class="form-control">
+							<option value="">Day</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select> / <select class="form-control">
+							<option value="">Year</option>
+							<option value="1992">1992</option>
+							<option value="1993">1993</option>
+							<option value="1994">1994</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-6 control-label" for="pragnant-last-chk">Pregnant
+						within the last 3 months?</label>
+					<div class="col-md-6">
+						<input type="checkbox" id="pragnant-last-chk">
+					</div>
+
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="pregnant-chk">Pregnant?</label>
+					<div class="col-md-7">
+						<input type="checkbox" id="pregnant-chk">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4 hidden" id="toggle-on-pregnant">
+				<div class="form-group">
+					<label for="numberofchildren" class="col-md-5 control-label">Children
+						Expected</label>
+					<div class="col-md-7 form-inline">
+						<select class="form-control">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-6 control-label" for="native-chk">Native
+						American?</label>
+					<div class="col-md-6">
+						<input type="checkbox" id="native-chk">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label for="citizenStatus" class="col-md-5 control-label">*Citizen
+						Status:</label>
+					<div class="col-md-7 form-inline">
+						<select class="form-control" id="citizen-select">
+							<option value="">Select</option>
+							<option value="1">U.S. Citizen</option>
+							<option value="2">Lawfully Present</option>
+							<option value="3">Unlawfully Present</option>
+
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="incarcerated-chk">Incarcerated?</label>
+					<div class="col-md-7">
+						<input type="checkbox" id="incarcerated-chk">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row hidden" id="toggle-on-citizen">
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="col-md-5">
+							<input type="checkbox" class="pull-right" id="veteran-chk">
+						</div>
+						<label class="col-md-7 control-label" for="veteran-chk">Veteran
+							Status</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="col-md-5">
+							<input type="checkbox" id="five-year-chk" class="pull-right">
+						</div>
+						<label class="col-md-7 control-label" for="five-year-chk">Five
+							Year Bar applies to applicant</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4" id="">
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="col-md-5">
+							<input type="checkbox" id="five-year-met-chk"
+								class="pull-right">
+						</div>
+						<label class="col-md-7 control-label" for="five-year-met-chk">Five
+							Year Bar has been met</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-2">
+				<div class="form-group">
+					<a href="#" class="btn btn-success btn-block"
+						data-toggle="modal" data-target="#incomeModal"> <span
+						class="glyphicon glyphicon-list-alt"></span> Calculate Income
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<div class="form-group table-responsive">
+					<table class="table table-hover table-bordered table-striped-no">
+						<thead>
+							<tr>
+								<th colspan="3">Income</th>
+								<th>Annual Income Entry</th>
+								<th>Total Annual Income</th>
+								<th>Medicaid Current Monthly</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Wages, salaries, tips, etc.:</td>
+								<td>4</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Wages, salaries, tips, etc.:</td>
+								<td>4</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Wages, salaries, tips, etc.:</td>
+								<td>4</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--table row 1-->
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<div class="form-group table-responsive">
+					<table class="table table-hover table-bordered table-striped-no">
+						<thead>
+							<tr>
+								<th colspan="3">Adjustments</th>
+								<th>Annual Adjustments</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Certain business expenses of reservists</td>
+								<td>34</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Certain business expenses of reservists, artists and
+									fee-basis govt officials</td>
+								<td>34</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Certain business expenses of reservi</td>
+								<td>34</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>artists and fee-basis govt officials</td>
+								<td>34</td>
+								<td><input type="text" class="" id="" placeholder="" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--table row 2-->
+		<div class="spacer-15">&nbsp;</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-12 text-center ">
+				<div class="btn-group">
+					<button type="button" class="btn btn-danger btn-lg btn-block">Reset</button>
+				</div>
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+	</div>
+	<!-- 12 cols -->
+</form>
+
 {% endblock body %}

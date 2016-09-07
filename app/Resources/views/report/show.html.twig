@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Report</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ report.name }}</td>
+            </tr>
+            <tr>
+                <th>Header</th>
+                <td>{{ report.header }}</td>
+            </tr>
+            <tr>
+                <th>Sqlstatement</th>
+                <td>{{ report.sqlStatement }}</td>
+            </tr>
+            <tr>
+                <th>Settings</th>
+                <td>{{ report.settings }}</td>
+            </tr>
+            <tr>
+                <th>Isactive</th>
+                <td>{% if report.isactive %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Modifiedby</th>
+                <td>{{ report.modifiedBy }}</td>
+            </tr>
+            <tr>
+                <th>Modifiedtimestamp</th>
+                <td>{% if report.modifiedTimestamp %}{{ report.modifiedTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdtimestamp</th>
+                <td>{% if report.createdTimestamp %}{{ report.createdTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ report.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ report.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('report_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

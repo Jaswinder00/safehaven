@@ -1,0 +1,95 @@
+{% set page_title = 'Report Management - Report Settings' %}
+
+{% extends 'DCGovHavenBundle::base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	
+	<div class="col-sm-9 col-sm-offset-3 main">
+	    <h4 class="sub-header">{{ page_title }}</h4>
+	    
+	    <h4>{{ report.header }}</h4>
+	    
+	    <hr>
+	    <form id="frmReportSettings" name="frmReportSettings" action="#">
+	    <div class="table-responsive">
+	        <table id="tblReportSettings" class="table table-striped display" cellspacing="20" width="100%">
+	            <thead>
+	                <tr>
+	                	<th></th>
+                    {% for column in report_columns %}
+    			    	<th>{{ column | title }}</th>
+    			    {% endfor %}
+	                </tr>
+	            </thead>
+	            <tbody>
+	               
+    			    <!-- Drop Down | Input Text Option --->
+    			    <tr>
+    			    {% if report_columns|length > 0 %}
+    			    	<td>Set Search By</td>
+    			    	
+        			    <!-- Iterate through the Report Columns and column options -->	
+    			        {% for i in 0..(report_columns|length)-1 %}
+                            <td>
+                            	<fieldset>
+                            		<div class="radio">
+                            			<label><input type="radio" name="column[{{ i }}]" value="input">Input</label>
+                            		</div>
+                            		<div class="radio">
+                            			<label><input type="radio" name="column[{{ i }}]" value="dropdown">Drop Down</label>
+                            		</div>
+                            		<div class="radio">
+                            			<label><input type="radio" name="column[{{ i }}]" value="none" checked>None</label>
+                            		</div>
+                            	</fieldset>
+                            </td>
+                        {% endfor %}
+					{% else %}
+						<td><br><span class="alert alert-info" >No Columns were retrieved or internal error occurred. Please check the report settings SQL statement.</span>                       
+                    {% endif %}
+    			    </tr>
+	            	
+	            </tbody>
+	        </table>
+	        
+	    </div>
+	     <div class="row">
+            <div class="checkbox">
+            	<label><input name="showexporttoexcel" type="checkbox"> Show Export To Excel Option</label>
+			</div>
+		</div>
+		
+	    <div class="row">
+            <div class="col-md-12">
+				<div id="divReportSettingsStatusAlert" class='alert alert-status' role='alert'></div>
+				<input id="btnManageReports" type="button" class="btn btn-primary" value="Manage Reports">
+				
+				<input id="btnViewReport" type="button" 
+					class="btn btn-primary {% if report.isactive == false %} disabled {% endif %}" 
+					value="View Report">
+				
+				<input id="btnReportSettingsUpdate" type="submit" class="btn btn-primary" value="Update">
+			</div>
+		</div>
+		<input id="reportid" name="reportid" type="hidden" value="{{ report.id }}">
+	    </form>
+    </div>
+    
+{% endblock body %}
+
+{% block footer %}
+	{{ parent() }}
+	
+	<script type="text/javascript">
+		//Convert the settings in Javascript Context
+		var	report_settings = "{{ report.settings | escape('js') }}";
+		
+    </script>
+    
+    {% javascripts '@DCGovHavenBundle/Resources/public/js/admin.js' %}
+     
+    	<script src="{{ asset_url }}" defer></script>
+    {% endjavascripts %}
+     
+{% endblock footer %}
