@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\Tax" table="tax">
+    <indexes>
+      <index name="tax_applicationid_idx" columns="applicationid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="personid" type="bigint" column="personid" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="taxno" type="smallint" column="taxno" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="filertype" type="string" column="filertype" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

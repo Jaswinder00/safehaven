@@ -161,4 +161,19 @@ class Common {
 		return rtrim($decrypted_string);
 	}
 	
+	/**
+	 * 
+	 * @param DateTime $dateofbirth
+	 * @return number
+	 */
+	public static function computeAge($dateofbirth) {
+		$curMonth = date("m");
+        $curDay = date("j");
+        $curYear = date("Y");
+		$age = $curYear - $dateofbirth->format('Y');
+		if($curMonth < $dateofbirth->format('m') || ($curMonth==$dateofbirth->format('m') && $curDay < $dateofbirth->format('d')))
+			$age--;
+			
+		return $age;  
+	}
 }

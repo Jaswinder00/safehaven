@@ -9,10 +9,11 @@
     	<!--- Initalize Javascript path variables ---!>
 		var _route = "{{ app.request.attributes.get('_route') }}";
 
+		var dc_gov_haven_application_save = "{{ path('dc_gov_haven_application_save') }}";
+		
 		var dc_gov_haven_admin_manageusers_users ="{{ path('dc_gov_haven_admin_manageusers_users') }}";	
 		var dc_gov_haven_admin_reports = "{{ path('dc_gov_haven_admin_reports') }}";
 		var dc_gov_haven_admin_reports_save = "{{ path('dc_gov_haven_admin_reports_save') }}";
-		
 		
 		var dc_gov_haven_admin_managereport_settings = "{{ path('dc_gov_haven_admin_managereport_settings') }}";
 		var dc_gov_haven_admin_report_settings_save = "{{ path('dc_gov_haven_admin_report_settings_save') }}";
@@ -46,6 +47,7 @@
         				'@DCGovHavenBundle/Resources/public/js/bootstrap/bootstrap.multiselect.js'
         				'@DCGovHavenBundle/Resources/public/js/bootstrap/bootstrap.dropdown.on.hover.js'
         				'@DCGovHavenBundle/Resources/public/js/common.js'
+        				'@DCGovHavenBundle/Resources/public/js/application.js'
 
             %}
             

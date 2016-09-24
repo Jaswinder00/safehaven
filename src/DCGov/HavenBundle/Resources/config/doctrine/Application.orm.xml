@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\Application" table="application">
+    <id name="applicationid" type="bigint" column="applicationid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="statecd" type="string" column="statecd" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="year" type="string" column="year" length="4" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="name" type="string" column="name" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postdate" type="date" column="postdate" nullable="true"/>
+    <field name="status" type="string" column="status" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="statustimestamp" type="datetime" column="statustimestamp" nullable="true">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="addressstreet" type="string" column="addressstreet" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">			</option>
+      </options>
+    </field>
+    <field name="addresscity" type="string" column="addresscity" length="35" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">		</option>
+      </options>
+    </field>
+    <field name="addressstate" type="string" column="addressstate" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">	</option>
+      </options>
+    </field>
+    <field name="requesttype" type="string" column="requesttype" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="erFlag" type="string" column="er_flag" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="edpFlag" type="string" column="edp_flag" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="icnumber" type="string" column="icnumber" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comments" type="text" column="comments" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="createdTimestamp" type="datetime" column="created_timestamp" nullable="true">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="createdBy" type="integer" column="created_by" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

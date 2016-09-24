@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\Aptc" table="aptc">
+    <indexes>
+      <index name="aptc_applicationid_idx" columns="applicationid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="resultid" type="smallint" column="resultid" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="taxno" type="smallint" column="taxno" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="inputoutput" type="string" column="inputoutput" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="responsetype" type="string" column="responsetype" length="60" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="responsevalue" type="string" column="responsevalue" length="60" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="responsetimestamp" type="datetime" column="responsetimestamp" nullable="true"/>
+    <field name="requesttype" type="string" column="requesttype" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="requestvalue" type="string" column="requestvalue" length="60" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="requestimestamp" type="datetime" column="requestimestamp" nullable="true"/>
+    <many-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

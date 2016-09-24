@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\Eval" table="eval">
+    <indexes>
+      <index name="eval_applicationid_idx" columns="applicationid"/>
+    </indexes>
+    <id name="resultid" type="smallint" column="resultid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="evaldate" type="date" column="evaldate" nullable="true"/>
+    <field name="reqtimestamp" type="datetime" column="reqtimestamp" nullable="true"/>
+    <field name="evaltimestamp" type="datetime" column="evaltimestamp" nullable="true"/>
+    <field name="numperson" type="smallint" column="numperson" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="jsonsent" type="text" column="jsonsent" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="jsonreturned" type="text" column="jsonreturned" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aptcbenchmark" type="decimal" column="aptcbenchmark" precision="13" scale="2" nullable="true"/>
+    <field name="aptcyear" type="string" column="aptcyear" length="4" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aptcexpectedcontribution" type="decimal" column="aptcexpectedcontribution" precision="13" scale="2" nullable="true"/>
+    <field name="aptcexpectedpercentage" type="decimal" column="aptcexpectedpercentage" precision="13" scale="2" nullable="true"/>
+    <field name="aptccsrpercent" type="smallint" column="aptccsrpercent" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="aptcfpl" type="decimal" column="aptcfpl" precision="13" scale="2" nullable="true"/>
+    <field name="aptcincome" type="decimal" column="aptcincome" precision="13" scale="2" nullable="true"/>
+    <field name="aptchhsize" type="smallint" column="aptchhsize" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="aptcaptc" type="decimal" column="aptcaptc" precision="13" scale="2" nullable="true"/>
+    <many-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

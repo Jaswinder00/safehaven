@@ -1,0 +1,12 @@
+applicationperson_index:
+    path:     /
+    defaults: { _controller: "DCGovHavenBundle:ApplicationPerson:index" }
+    methods:  GET
+
+applicationperson_show:
+    path:     /{id}/show
+    defaults: { _controller: "DCGovHavenBundle:ApplicationPerson:show" }
+    methods:  GET
+
+
+

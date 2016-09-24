@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\EvalPerson" table="eval_person">
+    <indexes>
+      <index name="eval_person_personid" columns="personid"/>
+      <index name="eval_person_applicationid_idx" columns="applicationid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="resultid" type="smallint" column="resultid" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mitcmagi" type="integer" column="mitcmagi" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mitcfpl" type="smallint" column="mitcfpl" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mitchhsize" type="smallint" column="mitchhsize" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="mitcmedicaid" type="string" column="mitcmedicaid" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mitcaptcreferal" type="string" column="mitcaptcreferal" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mitcmediincomesligible" type="string" column="mitcmediincomesligible" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="personid" target-entity="ApplicationPerson" fetch="LAZY">
+      <join-columns>
+        <join-column name="personid" referenced-column-name="personid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

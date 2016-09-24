@@ -1,0 +1,15 @@
+{% extends 'DCGovHavenBundle::base.html.twig' %}
+{% set returnValue = return_value |json_decode() %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="col-sm-9 main">
+        <h4 class="sub-header alert alert-info">Thank You for submitting your application! 
+        {% if(returnValue.status == 'SUCCESS') %}
+        	You application id is <a href="{{ returnValue.id }}">{{ returnValue.id }}</a> </h4>
+          
+    	{% else %}
+    		Sorry, we are unable to process your application at this time. Please contact the system administrator.
+    	{% endif %}
+    </div>
+{% endblock body %}

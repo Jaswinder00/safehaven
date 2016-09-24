@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\Relationship" table="relationship">
+    <indexes>
+      <index name="relationship_applicationid" columns="applicationid"/>
+      <index name="relationship_personid" columns="personid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="applicationid" type="bigint" column="applicationid" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="relationship" type="string" column="relationship" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="primaryresponsibility" type="string" column="primaryresponsibility" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="crosspersonid" type="bigint" column="crosspersonid" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="crossrelationship" type="string" column="crossrelationship" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="crossprimaryresponsibility" type="string" column="crossprimaryresponsibility" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="personid" target-entity="ApplicationPerson" fetch="LAZY">
+      <join-columns>
+        <join-column name="personid" referenced-column-name="personid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

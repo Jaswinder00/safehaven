@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\PersonIncome" table="person_income">
+    <indexes>
+      <index name="person_income_personid" columns="personid"/>
+      <index name="person_income_applicationid_idx" columns="applicationid"/>
+    </indexes>
+    <id name="incomeid" type="smallint" column="incomeid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="incometype" type="string" column="incometype" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="wagetype" type="string" column="wagetype" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="paymentfrequency" type="string" column="paymentfrequency" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="incomeamount" type="decimal" column="incomeamount" precision="13" scale="2" nullable="true"/>
+    <field name="startdate" type="date" column="startdate" nullable="true"/>
+    <field name="enddate" type="date" column="enddate" nullable="true"/>
+    <field name="annualincome" type="decimal" column="annualincome" precision="13" scale="2" nullable="true"/>
+    <field name="employername" type="string" column="employername" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employerin" type="string" column="employerin" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employeraddress" type="string" column="employeraddress" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employercity" type="string" column="employercity" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employerstate" type="string" column="employerstate" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employerzipcode" type="string" column="employerzipcode" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employerplancover" type="string" column="employerplancover" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employerplanminimum" type="string" column="employerplanminimum" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="emplyeecost" type="decimal" column="emplyeecost" precision="13" scale="2" nullable="true"/>
+    <field name="employeeiseligible" type="string" column="employeeiseligible" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="employeeelidate" type="date" column="employeeelidate" nullable="true"/>
+    <field name="employeecostfrequency" type="smallint" column="employeecostfrequency" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="personid" target-entity="ApplicationPerson" fetch="LAZY">
+      <join-columns>
+        <join-column name="personid" referenced-column-name="personid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
