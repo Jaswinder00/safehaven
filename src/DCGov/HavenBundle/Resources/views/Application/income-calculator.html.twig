@@ -44,10 +44,9 @@
 							</div>
 						</div>
 
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12 col-md-6" id="col_wagetype">
 							<div class="form-group cursor-pointer">
-								<label class="col-md-6 control-label" for="wagetype">Wage
-									Type:</label>
+								<label class="col-md-6 control-label" for="wagetype">Wage Type:</label>
 								<div class="col-md-6 form-inline">
 									<select id="wagetype" name="wagetype" class="form-control">
 										<option value="w2wages">W2 Wages</option>
@@ -68,10 +67,10 @@
 										name="employername" placeholder="Employer Name">
 								</div>
 							
-								<label class="col-md-3 control-label" for="employername">Employer ID Number:</label>
+								<label class="col-md-3 control-label" for="employerid">Employer ID Number:</label>
 								<div class="col-md-3 form-inline">
-									<input type="text" class="form-control cursor-pointer" id="employeridnumber"
-										name="employeridnumber" placeholder="ID Number">
+									<input type="text" class="form-control cursor-pointer" id="employerid"
+										name="employerid" placeholder="ID Number">
 								</div>
 							</div>
 						</div>
@@ -166,11 +165,11 @@
 						
 						<div class="row">
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="isemployeeEligible">Is
+								<label class="col-md-3 control-label" for="isemployeeeligible">*Is
 									Employee Eligible:</label>
 								<div class="col-md-3 form-inline">
-									<select id="isemployeeEligible" name="isemployeeEligible"
-										class="form-control cursor-pointer">
+									<select id="isemployeeeligible" name="isemployeeeligible"
+										class="form-control cursor-pointer" required>
 										<option value=""></option>
 										<option value="Y">Yes</option>
 										<option value="3">Within 3 Months</option>
@@ -198,10 +197,10 @@
 									</select>
 								</div>
 							
-								<label class="col-md-3 control-label" for="planmeet">*Plan
+								<label class="col-md-3 control-label" for="employerplanminimum">*Plan
 									Meets Minimum:</label>
 								<div class="col-md-3 form-inline">
-									<select id="employerPlanMinimum" name="employerPlanMinimum"
+									<select id="employerplanminimum" name="employerplanminimum"
 										class="form-control cursor-pointer">
 										<option value=""></option>
 										<option value="Y">Yes</option>
@@ -279,13 +278,22 @@
     							
     							<label class="col-md-3 control-label" for="payenddate">End
     								Date:</label>
-    							<div class="col-md-3 form-inline">
+    							<div class="col-md-2 form-inline">
     								<input type="date" class="form-control" id="payenddate"
     									name="payenddate">
     							</div>
     						</div>
     					</div>
-    
+    					<div class="row">
+    						<div class="form-group">
+    							<label class="col-md-3 control-label" for="cal_days">Calculated Days:</label>
+    							<div class="col-md-3 form-inline">
+    								<input type="number" step="any" class="form-control"
+    									id="cal_days" name="cal_days" readonly>
+    							</div>
+    						</div>
+    					</div>
+    					
     					<div class="row">
     						<div class="form-group">
     							<label class="col-md-3 control-label" for="annualincome">Annual
@@ -295,15 +303,14 @@
     									id="annualincome" name="annualincome" readonly>
     							</div>
     						
-    							<label class="col-md-3 control-label" for="medicaid_current_monthly">Medicaid Current Monthly:</label>
+    							<label class="col-md-3 control-label" for="medicaidcurrentmonthly">Medicaid Current Monthly:</label>
     							<div class="col-md-3 form-inline">
     								<input type="number" step="any" class="form-control"
-    									id="medicaid_current_monthly" name="medicaid_current_monthly"
+    									id="medicaidcurrentmonthly" name="medicaidcurrentmonthly"
     									readonly>
     							</div>
     						</div>
     					</div>
-    					
 					</div>
 					
 					<div class="row">

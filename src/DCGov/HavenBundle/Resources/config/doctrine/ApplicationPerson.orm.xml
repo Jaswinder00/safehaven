@@ -298,14 +298,14 @@
         <option name="fixed"/>
       </options>
     </field>
-    <one-to-one field="applicationid" target-entity="Application" fetch="LAZY">
-      <join-columns>
-        <join-column name="applicationid" referenced-column-name="applicationid"/>
-      </join-columns>
-    </one-to-one>
     <one-to-one field="personid" target-entity="Person" fetch="LAZY">
       <join-columns>
         <join-column name="personid" referenced-column-name="personid"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
       </join-columns>
     </one-to-one>
   </entity>

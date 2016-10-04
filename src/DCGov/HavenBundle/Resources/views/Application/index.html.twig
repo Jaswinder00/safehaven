@@ -16,7 +16,13 @@
 				<div class="col-md-6">
 					<input type="text" class="form-control" id="application_name" name="application_name"
 						value="{{ app.user.firstname }}-{{ [current_month, current_day, current_year] | join }}"
-						placeholder="Application Name" required autofocus/>
+						placeholder="Application Name" 
+						{% if applicationid > 0 %}
+							disabled
+						{% else %}
+						required autofocus
+						{% endif %}
+						/>
 				</div>
 			</div>
 		</div>
@@ -24,6 +30,10 @@
 			<div class="form-group">
 				<label for="applicationDate" class="col-md-5 control-label">Application Date:</label>
 				<div class="col-md-7 form-inline">
+				{% if applicationid > 0 %}
+					<input type="text" class="form-control" value="{{ application.postdate | date('m-d-Y') }}" readonly>
+				{% else %}
+						
 					<select name="application_month" id="application_month"
 						title="Month" class="form-control">
 						{% for j in range(1, 12) %}
@@ -53,6 +63,7 @@
 							{% endif %}
 						{% endfor %}
 					</select>
+				{% endif %}
 				</div>
 			</div>
 		</div>
@@ -60,7 +71,12 @@
 			<div class="form-group cursor-pointer">
 				<label class="col-md-5 control-label" for="istestapp">Test App?:</label>
 				<div class="col-md-7">
-					<input type="checkbox" id="istestapp" name="istestapp">
+					<input type="checkbox" id="istestapp" name="istestapp"
+					{% if applicationid > 0 %}
+						
+						readonly  
+					{% endif %}
+					>
 				</div>
 			</div>
 		</div>
@@ -73,16 +89,26 @@
 					Number:</label>
 				<div class="col-md-6">
 					<input type="text" class="form-control" id="ic_number" name="ic_number"
-						placeholder="IC Number" />
+						placeholder="IC Number" 
+					{% if applicationid > 0 %}
+						value = "{{ application.icnumber }}"
+						readonly  
+					{% endif %}
+					/>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-4">
 			<div class="form-group">
-				<label for="clsNumber" class="col-md-5 control-label">CLS Number:</label>
+				<label for="csl_number" class="col-md-5 control-label">CSL Number:</label>
 				<div class="col-md-7">
-					<input type="text" class="form-control" id="cls_number" name="cls_number"
-						placeholder="CLS Number" />
+					<input type="text" class="form-control" id="csl_number" name="csl_number"
+						placeholder="CSL Number" 
+					{% if applicationid > 0 %}
+						
+						readonly  
+					{% endif %}
+					/>
 				</div>
 			</div>
 		</div>
@@ -90,13 +116,19 @@
 			<div class="form-group">
 				<label for="request_type" class="col-md-5 control-label">Request Type:</label>
 				<div class="col-md-7 form-inline">
-					<input list="request_types" name="request_type" id="request_type">
+					<input list="request_types" name="request_type" id="request_type"
+					{% if applicationid > 0 %}
+						value = "{{ application.requesttype }}"	
+						readonly  
+					{% endif %}
+					>
                       <datalist id="request_types">
                          {% for type in request_types %}
         			    	 <option value="{{ type['requesttype'] }}">
         			    {% endfor %}
                         
                       </datalist>
+                    
 				</div>
 			</div>
 		</div>
@@ -107,7 +139,13 @@
 			<div class="form-group">
 				<label for="comments" class="col-md-3 control-label">Comments:</label>
 				<div class="col-md-9">
-					<textarea class="form-control" id="comments" name="comments"></textarea>
+					<textarea class="form-control" id="comments" name="comments">
+					
+					{% if applicationid > 0 %}
+						{{ application.comments }}	
+						  
+					{% endif %}
+					</textarea>
 				</div>
 			</div>
 		</div>
@@ -281,7 +319,7 @@
 			<div class="form-group cursor-pointer">
 				<label class="col-md-6 control-label" for="isapplyinsurance">Is this person applying for insurance?</label>
 				<div class="col-md-6">
-					<input type="checkbox" id="isapplyinsurance" name="isapplyinsurance">
+					<input type="checkbox" id="isapplyinsurance" name="isapplyinsurance" checked>
 				</div>
 			</div>
 		</div>
@@ -459,14 +497,55 @@
 		</div>
 	</div>
 	
-	<!-- Income Calculator -->
-	<div class="row" id="row_calculateIncome">
+	
+	<div class="row">
+		<!-- Income Calculator Link -->
     	<div class="col-xs-12 col-md-2">
     		<div class="form-group">
     			<a href="#" class="btn btn-success btn-block"
     				data-toggle="modal" data-target="#incomeModal"> 
     				<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Calculate Income
     			</a>
+    		</div>
+    	</div>
+    	
+    	<!-- Income Table Link -->
+    	<div class="col-xs-12 col-md-2" id="col_incometable">
+    		<div class="form-group">
+    			<a href="#custom_incomeTable" class="btn btn-success btn-block"
+    				data-toggle="collapse"> 
+    				<span class="glyphicon glyphicon-th"></span>&nbsp;Custom Income Entries
+    			</a>
+    		</div>
+    	</div>
+    </div>
+    
+	<!-- Income Table -->
+	<div class="collapse fade" id="custom_incomeTable">
+    	<div class="col-xs-12 col-md-12">
+    		<div class="table-responsive">
+    			<table id="tblCustomIncome" class="table table-hover table-bordered table-striped-no table-condensed">
+    				<thead>
+    					<tr>
+    						<th>Delete</th>
+    						<th>Income Type</th>
+    						<th>Pay Period</th>
+    						<th>Income</th>
+    						<th>Start Date</th>
+    						<th>End Date</th>
+    						<th>Annual Income</th>
+    						<th>Medicaid Monthly</th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    				</tbody>
+    			</table>
+    		</div>
+		</div>
+		<!-- Delete Button -->
+    	<div class="col-xs-12 col-md-2">
+    		<div class="form-group">
+    			<button id="btnDeleteCustomIncome" type="button" class="btn btn-danger" disabled>Delete</button>
     		</div>
     	</div>
     </div>
@@ -477,7 +556,75 @@
 	<!-- Adjustment Entry -->
 	{% include 'DCGovHavenBundle:Application:adjustment.html.twig' %}
 	
-	<div class="spacer-15">&nbsp;</div>
+	{% if applicationid > 0 %}
+	<div class="row">
+		<!-- Applicants Relationships -->
+		
+    	<div class="col-xs-12 col-md-12">
+    		<div class="table-responsive">
+    			<table id="tblApplicantsRelationship" class="table table-hover table-bordered table-striped-no table-condensed">
+    				<thead>
+    					<tr>
+    						<th>Delete</th>
+    						<th>Income Type</th>
+    						<th>Pay Period</th>
+    						<th>Income</th>
+    						<th>Start Date</th>
+    						<th>End Date</th>
+    						<th>Annual Income</th>
+    						<th>Medicaid Monthly</th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    				</tbody>
+    			</table>
+    		</div>
+		</div>
+    </div>
+		The person {{ [ap[i].firstname, ap[i].lasstname] | join(' ') }}
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="tax_return" class="col-md-6 control-label">*Tax Return:</label>
+				<div class="col-md-6">
+					<select name="tax_return" class="form-control" required>
+						<option value=""></option>
+						<option value="1">Tax Return: 1</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	{%  else %}
+	<div class="row">	
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="tax_return" class="col-md-6 control-label">*Tax Return:</label>
+				<div class="col-md-6">
+					<select name="tax_return" class="form-control" required>
+						<option value=""></option>
+						<option value="1">Tax Return: 1</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="taxfilertype" class="col-md-5 control-label">*Filer Type:</label>
+				<div class="col-md-7 form-inline">
+					<select name="taxfilertype" id="taxfilertype" class="form-control" required>
+						<option value=""></option>
+						<option value="Filers">Filer</option>
+						<option value="Dependents">Dependent</option>
+						<option value="none">Non-filer</option>
+						
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>	
+	{% endif %}
+	
+	<div class="spacer-10">&nbsp;</div>
 	
 	<div class="row">
 		<div class="col-xs-12 col-md-12 text-center ">
@@ -490,6 +637,9 @@
 		</div>
 	</div>
 	<!-- row -->
+	
+	<input type="hidden" id="applicationid" name="applicationid" value="{{ applicationid }}">
+	<input type="hidden" id="hoursworked" name="hoursworked" value="0">
 </form>
 
 <!-- Include Modal block for Income Calculator -->

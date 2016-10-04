@@ -45,12 +45,17 @@ class PersonIncome
     /**
      * @var string
      */
+    private $medicaidmonthly;
+
+    /**
+     * @var string
+     */
     private $employername;
 
     /**
      * @var string
      */
-    private $employerin;
+    private $employerid;
 
     /**
      * @var string
@@ -108,7 +113,7 @@ class PersonIncome
     private $incomeid;
 
     /**
-     * @var \DCGov\HavenBundle\Entity\ApplicationPerson
+     * @var \DCGov\HavenBundle\Entity\Person
      */
     private $personid;
 
@@ -287,6 +292,30 @@ class PersonIncome
     }
 
     /**
+     * Set medicaidmonthly
+     *
+     * @param string $medicaidmonthly
+     *
+     * @return PersonIncome
+     */
+    public function setMedicaidmonthly($medicaidmonthly)
+    {
+        $this->medicaidmonthly = $medicaidmonthly;
+
+        return $this;
+    }
+
+    /**
+     * Get medicaidmonthly
+     *
+     * @return string
+     */
+    public function getMedicaidmonthly()
+    {
+        return $this->medicaidmonthly;
+    }
+
+    /**
      * Set employername
      *
      * @param string $employername
@@ -311,27 +340,27 @@ class PersonIncome
     }
 
     /**
-     * Set employerin
+     * Set employerid
      *
-     * @param string $employerin
+     * @param string $employerid
      *
      * @return PersonIncome
      */
-    public function setEmployerin($employerin)
+    public function setEmployerid($employerid)
     {
-        $this->employerin = $employerin;
+        $this->employerid = $employerid;
 
         return $this;
     }
 
     /**
-     * Get employerin
+     * Get employerid
      *
      * @return string
      */
-    public function getEmployerin()
+    public function getEmployerid()
     {
-        return $this->employerin;
+        return $this->employerid;
     }
 
     /**
@@ -587,11 +616,11 @@ class PersonIncome
     /**
      * Set personid
      *
-     * @param \DCGov\HavenBundle\Entity\ApplicationPerson $personid
+     * @param \DCGov\HavenBundle\Entity\Person $personid
      *
      * @return PersonIncome
      */
-    public function setPersonid(\DCGov\HavenBundle\Entity\ApplicationPerson $personid = null)
+    public function setPersonid(\DCGov\HavenBundle\Entity\Person $personid = null)
     {
         $this->personid = $personid;
 
@@ -601,7 +630,7 @@ class PersonIncome
     /**
      * Get personid
      *
-     * @return \DCGov\HavenBundle\Entity\ApplicationPerson
+     * @return \DCGov\HavenBundle\Entity\Person
      */
     public function getPersonid()
     {
@@ -632,3 +661,4 @@ class PersonIncome
         return $this->applicationid;
     }
 }
+

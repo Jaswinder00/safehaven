@@ -14,6 +14,7 @@ use Monolog\Logger;
 use DCGov\HavenBundle\Entity\Application;
 use DCGov\HavenBundle\Entity\Person;
 use DCGov\HavenBundle\Entity\ApplicationPerson;
+use DCGov\HavenBundle\Entity\PersonIncome;
 
 class CustomApplicationController extends Controller
 {
@@ -21,18 +22,42 @@ class CustomApplicationController extends Controller
 	const IMMIGRATION_STATUS_CITIZEN = 1;
 	const IMMIGRATION_STATUS_LAWFULLY_PRESENT = 2;
 	
+	/**
+	 * Call this controller action to create new Application
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function newAction(Request $request)
 	{
+		$applicationid = 0;
+		$application = null;
+		if(null != $request->query->get('applicationid')) {
+			$applicationid = $request->query->get('applicationid');
+			//Get the Entity Manager to save the data to db
+			$em = $this->getDoctrine()->getManager();
+			$application = $em->getRepository('DCGovHavenBundle:Application')->find($applicationid);
+		}
+		
 		//Get unique application request types
 		return $this->render('DCGovHavenBundle:Application:index.html.twig',
-				array('request_types' =>  $this->getRequestTypes()) );
+				array(	'applicationid' => $applicationid,
+						'application' => $application,
+						'request_types' =>  $this->getRequestTypes()) );
 	}
 	
+	/**
+	 * Call this controller action to view Application
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function viewAction(Request $request)
 	{
+		$applicationid = $request->query->get('applicationid');
+		
 		//Get unique application request types
 		return $this->render('DCGovHavenBundle:Application:view.html.twig',
-				array('request_types' =>  $this->getRequestTypes()) );
+				array(	'applicationid' => $applicationid,
+						'request_types' =>  $this->getRequestTypes()) );
 	}
 	
 	/**
@@ -47,14 +72,59 @@ class CustomApplicationController extends Controller
 		try {
 
 			//Read Post Values
+			$city = $request->request->get('city');
+			$state = $request->request->get('state');
+			$street = $request->request->get('street');
+			
+			$applicationid = $request->request->get('applicationid');
 			$application_name = $request->request->get('application_name');
-			$application_month = $request->request->get('application_month');
-			$application_day = $request->request->get('application_day');
-			$application_year = $request->request->get('application_year');
-			$ic_number = $request->request->get('ic_number');
-			$cls_number = $request->request->get('cls_number');
-			$request_type = $request->request->get('request_type');
-			$comments = $request->request->get('comments');
+			//Get the Entity Manager to save the data to db
+			$em = $this->getDoctrine()->getManager();
+			
+			if(0 == $applicationid) {
+				
+				$application_month = $request->request->get('application_month');
+				$application_day = $request->request->get('application_day');
+				$application_year = $request->request->get('application_year');
+				$ic_number = $request->request->get('ic_number');
+				$csl_number = $request->request->get('csl_number');
+				$request_type = $request->request->get('request_type');
+				$comments = $request->request->get('comments');
+				
+				/**
+				 * Application
+				 */
+				//Create new application
+				$application = new Application();
+					
+				$application->setAddresscity($city);
+				$application->setAddressstate($state);
+				$application->setAddressstreet($street);
+				$application->setIcnumber($ic_number);
+				$application->setName($application_name);
+				$application->setStatus("P");
+				$application->setComments($comments);
+					
+					
+				$application->setCreatedTimestamp(new \DateTime('now'));
+				$application->setCreatedBy(Common::getLoggedInUser($this)->getId());
+				$application->setStatustimestamp(new \DateTime('now'));
+					
+				$postdate = new \DateTime('now');
+				$postdate->setDate($application_year, $application_month, $application_day);
+				$application->setPostdate($postdate);
+					
+				$application->setRequesttype($request_type);
+				$application->setYear($application_year);
+					
+
+				//Save data to Application table
+				$em->persist($application);
+				$em->flush();
+			} {
+				$application = $em->getRepository('DCGovHavenBundle:Application')->find($applicationid);
+			}
+			
 			$firstname = $request->request->get('firstname');
 			$lastname = $request->request->get('lastname');
 			$dob_month = $request->request->get('dob_month');
@@ -62,38 +132,11 @@ class CustomApplicationController extends Controller
 			$dob_year = $request->request->get('dob_year');
 			$gender = $request->request->get('gender');
 			$ssn = $request->request->get('ssn');
-			$street = $request->request->get('street');
-			$city = $request->request->get('city');
-			$state = $request->request->get('state');
-
 			
-			//Create new application
-			$application = new Application();
 			
-			$application->setAddresscity($city);
-			$application->setAddressstate($state);
-			$application->setAddressstreet($street);
-			$application->setIcnumber($ic_number);
-			$application->setName($application_name);
-			$application->setStatus("P");
-			$application->setComments($comments);
-			
-			$application->setCreatedTimestamp(new \DateTime('now'));
-			$application->setCreatedBy(Common::getLoggedInUser($this)->getId());
-			$application->setStatustimestamp(new \DateTime('now'));
-			
-			$postdate = new \DateTime('now');
-			$postdate->setDate($application_year, $application_month, $application_day);
-			$application->setPostdate($postdate);
-			
-			$application->setRequesttype($request_type);
-			$application->setYear($application_year);
-			//Get the Entity Manager to save the data to db
-			$em = $this->getDoctrine()->getManager();
-			//Save data to Application table
-			$em->persist($application);
-			$em->flush();
-			
+			/**
+			 * Person
+			 */
 			//Prepare class for Person
 			$person = new Person();
 			$person->setFirstname($firstname);
@@ -106,6 +149,9 @@ class CustomApplicationController extends Controller
 			$em->persist($person);
 			$em->flush();
 			
+			/**
+			 * ApplicationPerson
+			 */
 			//Prepare class for Application Person
 			$applicationPerson = new ApplicationPerson();
 			$applicationPerson->setApplicationid($application);
@@ -113,25 +159,31 @@ class CustomApplicationController extends Controller
 			$applicationPerson->setName($application_name);
 			
 			if(null != $request->request->get('isapplyinsurance')) {
-				$applicationPerson->setIsapplicant('1');
+				$applicationPerson->setIsapplicant('Y');
+			} else {
+				$applicationPerson->setIsapplicant('N');
 			}
 			
 			if(null != $request->request->get('isstudent')) {
-				$applicationPerson->setIsstudent('1');
+				$applicationPerson->setIsstudent('Y');
+			} else {
+				$applicationPerson->setIsstudent('N');
 			}
 			
 			if(null != $request->request->get('isdisabled')) {
-				$applicationPerson->setIsdisabled('1');
+				$applicationPerson->setIsdisabled('Y');
+			} else {
+				$applicationPerson->setIsdisabled('N');
 			}
 			
 			if(null != $request->request->get('isclaimedasdependent')) {
 				//@TODO Confirm:
-				$applicationPerson->setIsclaimedoos('1');
-				$applicationPerson->setIsotherclaimed('1');
+				$applicationPerson->setIsclaimedoos('Y');
+				$applicationPerson->setIsotherclaimed('Y');
 			}
 			
 			if(null != $request->request->get('iseligibleforinsurance')) {
-				$applicationPerson->setIseligible('1');
+				$applicationPerson->setIseligible('Y');
 			}
 			
 			if(null != ($request->request->get('insurance_enddate_month'))) {
@@ -145,11 +197,11 @@ class CustomApplicationController extends Controller
 				
 				$applicationPerson->setPriorinsuranceenddate($priorinsuranceenddate);
 			
-				$applicationPerson->setIspriorinsured('1');
+				$applicationPerson->setIspriorinsured('Y');
 			}
 			
 			if(null != ($request->request->get('ispregnantinpast3months'))) {
-				$applicationPerson->setIslast3pregnant('1');
+				$applicationPerson->setIslast3pregnant('Y');
 			}
 			
 			if(null != ($request->request->get('numberofchildren'))) {
@@ -158,7 +210,7 @@ class CustomApplicationController extends Controller
 			}
 			
 			if(null != ($request->request->get('isnative'))) {
-				$applicationPerson->setNativeamerican('1');
+				$applicationPerson->setNativeamerican('Y');
 			}
 			
 			if(null != ($request->request->get('immigrationstatus'))) {
@@ -171,60 +223,59 @@ class CustomApplicationController extends Controller
 			}
 			
 			if(null != ($request->request->get('isincarcerated'))) {
-				$applicationPerson->setIsincarcerated('1');
+				$applicationPerson->setIsincarcerated('Y');
 			}
 			
+			//@TODO Confirm
 			if(null != ($request->request->get('istestapp'))) {
-				$applicationPerson->setIsltcattest('1');
+				$applicationPerson->setIsltcattest('Y');
 			}
 			
 			if(null != ($request->request->get('ispregnenant'))) {
-				$applicationPerson->setIspregnenant('1');
+				$applicationPerson->setIspregnenant('Y');
 			}
 			
 			if(null != ($request->request->get('iseligibleforinsurance'))) {
-				$applicationPerson->setIseligible('1');
+				$applicationPerson->setIseligible('Y');
 			}
 			
 			if(null != ($request->request->get('isclaimeroutofstate'))) {
-				$applicationPerson->setIsstateresident('1');
+				$applicationPerson->setIsstateresident('Y');
 			}
 			
 			if($state == "md") {
-				$applicationPerson->setIsstateresident('1');
+				$applicationPerson->setIsstateresident('Y');
 			}
 			else {
-				$applicationPerson->setIsstateresident('0');
+				$applicationPerson->setIsstateresident('N');
 			}
 			
 			//Lawfully Presence:
 			if(null != ($request->request->get('isveteran'))) {
-				$applicationPerson->setVetstatus('1');
+				$applicationPerson->setVetstatus('Y');
 			}
 				
 			if(null != ($request->request->get('isfiveyearbar'))) {
-				$applicationPerson->setHadfostermedicaid('1');
+				$applicationPerson->setHadfostermedicaid('Y');
 			}
 			
 			if(null != ($request->request->get('isfiveyearmet'))) {
-				$applicationPerson->setHadfostermedicaid('1');
+				$applicationPerson->setHadfostermedicaid('Y');
 			}
 			
 			//Foster Care Information:
 			if(null != ($request->request->get('isinfostercare'))) {
-				$applicationPerson->setIsfomerfoster('1');
+				$applicationPerson->setIsfomerfoster('Y');
 			}
 			
 			if(null != ($request->request->get('hadmedicaidinfostercare'))) {
-				$applicationPerson->setHadfostermedicaid('1');
+				$applicationPerson->setHadfostermedicaid('Y');
 			}
 			
 			$applicationPerson->setAgeleftfoster(intval($request->request->get('ageleftfostercare')));
 			$applicationPerson->setFosterstatecd($request->request->get('fostercarestate'));
-			
-			
-			
-			
+			$hrsworked = $request->request->get('hoursworked');
+			$applicationPerson->setHrsworked($hrsworked);
 			
 			//Income
 			$wages = $request->request->get('wages');
@@ -310,7 +361,7 @@ class CustomApplicationController extends Controller
 			$applicationPerson->setAge($age);
 			
 			if($age > 90) {
-				$applicationPerson->setAgegt90('1');
+				$applicationPerson->setAgegt90('Y');
 			}
 			
 			
@@ -350,7 +401,7 @@ class CustomApplicationController extends Controller
 			$applicationPerson->setFortyquaters($fortyquaters);
 
 			
-			$applicationPerson->setHrsworked($hrsworked);
+			
 			$applicationPerson->setImmigrationdate($immigrationdate);
 			$applicationPerson->setImmigrationdatetype($immigrationdatetype);
 			
@@ -394,6 +445,21 @@ class CustomApplicationController extends Controller
 			$em->persist($applicationPerson);
 			$em->flush();
 			
+			/**
+			 * PersonIncome
+			 */
+			$payment_entries = $request->request->get("cal_paymentamount");
+			if(null != $payment_entries) {
+				for($i = 0; $i < count($payment_entries); $i++) {
+					$this->addPersonIncome($request, $i, $application, $person);
+				}
+			}
+			
+			/**
+			 * Adjustments
+			 */
+			
+			
 			$return_value = Common::createJsonReturnMessage("SUCCESS",$application->getApplicationid(),"");
 			
 		} catch(DBALException $ex) {
@@ -402,18 +468,19 @@ class CustomApplicationController extends Controller
 			$return_value = Common::createJsonReturnMessage("FAILED",0,$ex->getMessage());
 		}
 		
-		$em->clear();
-		/*
-		//Prepare a response
-		$response = new Response();
-		$response->headers->set('Content-Type', 'application/json');
-		$response->setContent($return_value);
 		
-		return $response;
-		*/
+		
+		//Call DB to fetch a list of DB Users
+		$applicationperson = $em->getRepository('DCGovHavenBundle:ApplicationPerson')->findByApplicationid($application->getApplicationid());
+		
+		
+		$em->clear();
+		
 		//Get unique application request types
 		return $this->render('DCGovHavenBundle:Application:submission.html.twig',
-				array('return_value'=>$return_value));
+				array('return_value'=>$return_value,
+						'applicationperson' => $applicationperson
+				));
 	}
 
 	/**
@@ -425,6 +492,75 @@ class CustomApplicationController extends Controller
 		$query = $em->createQuery("SELECT DISTINCT a.requesttype from DCGovHavenBundle:Application a where a.requesttype is not null and a.requesttype <> ''");
 	
 		return $query->getResult();
+	}
+	
+	/**
+	 * Call this method to add new entry of PersonIncome
+	 * @param Request $request
+	 * @param Application $application
+	 * @param Person $person
+	 * @return boolean issaved
+	 */
+	private function addPersonIncome($request, $pi_index, $application, $person) {
+		try {
+			$personIncome = new PersonIncome();
+			$personIncome->setApplicationid($application);
+			$personIncome->setPersonid($person);
+				
+			$incomeType = $request->request->get("cal_incometype")[$pi_index];
+			$wageType = $request->request->get("cal_wagetype")[$pi_index];
+			$personIncome->setIncometype($incomeType);
+			$personIncome->setWagetype($wageType);
+			
+			$personIncome->setAnnualincome($request->request->get("cal_annualincome")[$pi_index]);
+			$personIncome->setIncomeamount($request->request->get("cal_paymentamount[$pi_index]"));
+				
+			$personIncome->setPaymentfrequency($request->request->get("cal_paymentfrequency")[$pi_index]);
+			$startDate = $request->request->get("cal_startdate")[$pi_index];
+			if(null != $startDate) {
+				$personIncome->setStartdate(Common::convertDate($startDate,"-"));
+			}
+			
+			$endDate = $request->request->get("cal_enddate")[$pi_index];
+			if(null != $endDate) {
+				$personIncome->setEnddate(Common::convertDate($endDate),"-");
+			}
+			
+			if("wages" == $incomeType and "w2wages" == $wageType) {
+				//Read Employer Information
+				$personIncome->setEmployername($request->request->get("cal_employername")[$pi_index]);
+				$personIncome->setEmployerid($request->request->get("cal_employerid")[$pi_index]);
+				$personIncome->setEmployeraddress($request->request->get("cal_employeraddress")[$pi_index]);
+			
+				$personIncome->setEmployercity($request->request->get("cal_employercity")[$pi_index]);
+				$personIncome->setEmployerstate($request->request->get("cal_employerstate")[$pi_index]);
+				$personIncome->setEmployerzipcode($request->request->get("cal_employerzip")[$pi_index]);
+				
+				$isemployeeEligible = $request->request->get("cal_isemployeeeligible")[$pi_index];
+				$personIncome->setEmployeeiseligible($isemployeeEligible);
+				
+				if("Yes" == $isemployeeEligible || "3" == $isemployeeEligible) {
+					//Save Employee Plan information
+					$personIncome->setEmployerplancover($request->request->get("cal_employerplancoverage")[$pi_index]);
+					$personIncome->setEmployerplanminimum($request->request->get("cal_employerplancoverage")[$pi_index]);
+					$personIncome->setEmployeecostfrequency($request->request->get("cal_planfrequency")[$pi_index]);
+					$personIncome->setEmplyeecost($request->request->get("cal_employeecost")[$pi_index]);
+				}
+				
+				
+			}
+			
+			$em = $this->getDoctrine()->getManager();
+			//Save data to Application table
+			$em->persist($personIncome);
+			$em->flush();
+		} catch(DBALException $ex) {
+			return false;
+		} catch (Exception $ex) {
+			//Log Exception to DB
+			return false;
+		}
+			
 	}
 	
 }

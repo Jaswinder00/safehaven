@@ -29,12 +29,12 @@ class Common {
 	
 	/**
 	 * Call this method to convert date yyyy-mm-dd to mm-dd-yyyy format
-	 * @param string $format_literal -  /, -, or .
 	 * @param string $date
+	 * @param string $format_literal -  /, -, or .
 	 * @return string $date
 	 */
 	public static function convertDate($date, $format_literal="/") {
-		if(null == $date) return "";
+		if(null == $date || "" == $date) return "";
 		return date("m".$format_literal."d".$format_literal."Y", strtotime($date));
 	}
 	
@@ -166,10 +166,17 @@ class Common {
 	 * @param DateTime $dateofbirth
 	 * @return number
 	 */
-	public static function computeAge($dateofbirth) {
-		$curMonth = date("m");
-        $curDay = date("j");
-        $curYear = date("Y");
+	public static function computeAge($dateofbirth, $tilldate = null) {
+		if(null != $tilldate) {
+			$curMonth = date("m");
+	        $curDay = date("j");
+	        $curYear = date("Y");
+		} else {
+			$curMonth = $dateofbirth->format('m');
+			$curDay = $dateofbirth->format('d');
+			$curYear = $dateofbirth->format('Y');
+		}
+		
 		$age = $curYear - $dateofbirth->format('Y');
 		if($curMonth < $dateofbirth->format('m') || ($curMonth==$dateofbirth->format('m') && $curDay < $dateofbirth->format('d')))
 			$age--;

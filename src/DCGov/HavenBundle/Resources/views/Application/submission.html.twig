@@ -1,13 +1,82 @@
 {% extends 'DCGovHavenBundle::base.html.twig' %}
 {% set returnValue = return_value |json_decode() %}
-
+{% set applicationid = applicationperson[0].applicationid.applicationid %}
 {% block body %}
 	{{ parent() }}
 	<div class="col-sm-9 main">
         <h4 class="sub-header alert alert-info">Thank You for submitting your application! 
         {% if(returnValue.status == 'SUCCESS') %}
+        	
         	You application id is <a href="{{ returnValue.id }}">{{ returnValue.id }}</a> </h4>
-          
+        	
+        	<!-- Application - Applicants Table -->
+        	<div id="custom_incomeTable">
+            	<div class="col-xs-12 col-md-12">
+            		<div class="table-responsive">
+            			<table id="tblApplicants" class="table table-hover table-bordered table-striped-no table-condensed">
+            				<thead>
+            					<tr>
+            						<th></th>
+            						<th>Applicantion ID</th>
+            						<th>Application Name</th>
+            						<th>Applicant Name</th>
+            						<th>Age</th>
+            						<th>D.O.B</th>
+            						<th>Status</th>
+            						<th>IC Number</th>
+            					</tr>
+            				</thead>
+            				<tbody>
+            					
+
+                                {% for ap in applicationperson %}
+                                	<tr>
+                                		<td><input type="checkbox" id="{{ [ap.applicationid.applicationid,ap.personid.personid] | join('_') }}"s ></td>
+                                    	<td>{{ ap.applicationid.applicationid }}</td>
+                                    	<td>{{ ap.applicationid.name }}</td>
+                                    	<td>{{ [ap.personid.firstname, ap.personid.lastname] | join(' ') }}</td>
+                                    	<td>{{ ap.age }}</td>
+                                    	<td>{{ ap.personid.dateofbirth }}</td>
+                                    	<td>{{ ap.applicationid.status }}</td>
+                                    	<td>{{ ap.applicationid.icnumber }}</td>
+                                    </tr>
+                                {% endfor %}
+            				</tbody>
+            			</table>
+            		</div>
+        		</div>
+        		
+        		<!-- Add Applicant -->
+        		<div class="col-xs-12 col-md-2">
+            		<div class="form-group">
+            			<a id="btnAddApplicant" type="button" class="btn btn-danger" href="{{ [path('dc_gov_haven_application_new'),applicationid] | join('?applicationid=')  }}">Add Applicant</a>
+            		</div>
+            	</div>
+            	
+            	<!-- Edit Applicant -->
+            	<div class="col-xs-12 col-md-2">
+            		<div class="form-group">
+            			<button id="btnEditApplicant" type="button" class="btn btn-danger" disabled>Edit Applicant</button>
+            		</div>
+            	</div>
+            	
+            	<!-- Delete Applicant -->
+            	<div class="col-xs-12 col-md-2">
+            		<div class="form-group">
+            			<button id="btnDeleteApplicant" type="button" class="btn btn-danger" disabled>Delete Applicant</button>
+            		</div>
+            	</div>
+            	
+            	<!-- Evaluate Applicant -->
+            	<div class="col-xs-12 col-md-2">
+            		<div class="form-group">
+            			<button id="btnEvaluateApplication" type="button" class="btn btn-danger">Evaluate</button>
+            		</div>
+            	</div>
+            </div>
+        	
+          	<input type="hidden" name="applicationid" value="{{ applicationid }}">
+          	
     	{% else %}
     		Sorry, we are unable to process your application at this time. Please contact the system administrator.
     	{% endif %}

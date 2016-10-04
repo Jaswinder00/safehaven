@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Person</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ person.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ person.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Dateofbirth</th>
+                <td>{{ person.dateofbirth }}</td>
+            </tr>
+            <tr>
+                <th>Ssn</th>
+                <td>{{ person.ssn }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ person.gender }}</td>
+            </tr>
+            <tr>
+                <th>Personid</th>
+                <td>{{ person.personid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dev_person_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

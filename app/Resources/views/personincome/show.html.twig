@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PersonIncome</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Incometype</th>
+                <td>{{ personIncome.incometype }}</td>
+            </tr>
+            <tr>
+                <th>Wagetype</th>
+                <td>{{ personIncome.wagetype }}</td>
+            </tr>
+            <tr>
+                <th>Paymentfrequency</th>
+                <td>{{ personIncome.paymentfrequency }}</td>
+            </tr>
+            <tr>
+                <th>Incomeamount</th>
+                <td>{{ personIncome.incomeamount }}</td>
+            </tr>
+            <tr>
+                <th>Startdate</th>
+                <td>{% if personIncome.startdate %}{{ personIncome.startdate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Enddate</th>
+                <td>{% if personIncome.enddate %}{{ personIncome.enddate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Annualincome</th>
+                <td>{{ personIncome.annualincome }}</td>
+            </tr>
+            <tr>
+                <th>Medicaidmonthly</th>
+                <td>{{ personIncome.medicaidmonthly }}</td>
+            </tr>
+            <tr>
+                <th>Employername</th>
+                <td>{{ personIncome.employername }}</td>
+            </tr>
+            <tr>
+                <th>Employerid</th>
+                <td>{{ personIncome.employerid }}</td>
+            </tr>
+            <tr>
+                <th>Employeraddress</th>
+                <td>{{ personIncome.employeraddress }}</td>
+            </tr>
+            <tr>
+                <th>Employercity</th>
+                <td>{{ personIncome.employercity }}</td>
+            </tr>
+            <tr>
+                <th>Employerstate</th>
+                <td>{{ personIncome.employerstate }}</td>
+            </tr>
+            <tr>
+                <th>Employerzipcode</th>
+                <td>{{ personIncome.employerzipcode }}</td>
+            </tr>
+            <tr>
+                <th>Employerplancover</th>
+                <td>{{ personIncome.employerplancover }}</td>
+            </tr>
+            <tr>
+                <th>Employerplanminimum</th>
+                <td>{{ personIncome.employerplanminimum }}</td>
+            </tr>
+            <tr>
+                <th>Emplyeecost</th>
+                <td>{{ personIncome.emplyeecost }}</td>
+            </tr>
+            <tr>
+                <th>Employeeiseligible</th>
+                <td>{{ personIncome.employeeiseligible }}</td>
+            </tr>
+            <tr>
+                <th>Employeeelidate</th>
+                <td>{% if personIncome.employeeelidate %}{{ personIncome.employeeelidate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Employeecostfrequency</th>
+                <td>{{ personIncome.employeecostfrequency }}</td>
+            </tr>
+            <tr>
+                <th>Incomeid</th>
+                <td>{{ personIncome.incomeid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('personincome_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

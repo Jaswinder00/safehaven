@@ -13,8 +13,8 @@ class PersonIncomeControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Go to the list view
-        $crawler = $client->request('GET', '/dev/personincome/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /dev/personincome/");
+        $crawler = $client->request('GET', '/personincome/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /personincome/");
 
         // Go to the show view
         $crawler = $client->click($crawler->selectLink('show')->link());

@@ -146,8 +146,12 @@ label, input {
     padding-top: 2px;
 }
 
-.cursor-pointer label, input {
+.cursor-pointer input {
 	cursor: pointer;
+}
+
+#incometype {
+	cursor: default;
 }
 
 .row h3 {
@@ -161,4 +165,8 @@ label, input {
 #spanAge {
 	text-decoration: underline;
 	margin-left: 2px;
+}
+
+#col_incometable {
+	margin-left: 8px;
 }
