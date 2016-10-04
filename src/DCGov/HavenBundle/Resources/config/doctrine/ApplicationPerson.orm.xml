@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\ApplicationPerson" table="application_person">
+    <indexes>
+      <index name="application_person_applicationid_idx" columns="applicationid"/>
+    </indexes>
+    <id name="personid" association-key="true"/>
+    <id name="applicationid" association-key="true"/>
+    <field name="isapplicant" type="string" column="isapplicant" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="name" type="string" column="name" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="age" type="smallint" column="age" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="hrsworked" type="smallint" column="hrsworked" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="isdisabled" type="string" column="isdisabled" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isstudent" type="string" column="isstudent" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ismedicareentitled" type="string" column="ismedicareentitled" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isstateresident" type="string" column="isstateresident" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isltcattest" type="string" column="isltcattest" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isotherclaimed" type="string" column="isotherclaimed" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isinsured" type="string" column="isinsured" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ispriorinsured" type="string" column="ispriorinsured" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ispublicempbenefit" type="string" column="ispublicempbenefit" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isfomerfoster" type="string" column="isfomerfoster" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ispregnenant" type="string" column="ispregnenant" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="islast3pregnant" type="string" column="islast3pregnant" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isuscitizen" type="string" column="isuscitizen" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isincarcerated" type="string" column="isincarcerated" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="istaxrequied" type="string" column="istaxrequied" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ffwages" type="decimal" column="ffwages" precision="13" scale="2" nullable="true"/>
+    <field name="wages" type="decimal" column="wages" precision="13" scale="2" nullable="true"/>
+    <field name="mcmwages" type="decimal" column="mcmwages" precision="13" scale="2" nullable="true"/>
+    <field name="fftaxableinterest" type="decimal" column="fftaxableinterest" precision="13" scale="2" nullable="true"/>
+    <field name="taxableinterest" type="decimal" column="taxableinterest" precision="13" scale="2" nullable="true"/>
+    <field name="mcmtaxableinterest" type="decimal" column="mcmtaxableinterest" precision="13" scale="2" nullable="true"/>
+    <field name="ffpentionannuities" type="decimal" column="ffpentionannuities" precision="13" scale="2" nullable="true"/>
+    <field name="pensionannuities" type="decimal" column="pensionannuities" precision="13" scale="2" nullable="true"/>
+    <field name="mcmpentionannuities" type="decimal" column="mcmpentionannuities" precision="13" scale="2" nullable="true"/>
+    <field name="fftaxexemptinterest" type="decimal" column="fftaxexemptinterest" precision="13" scale="2" nullable="true"/>
+    <field name="taxexemptinterest" type="decimal" column="taxexemptinterest" precision="13" scale="2" nullable="true"/>
+    <field name="mcmtaxexemptinterest" type="decimal" column="mcmtaxexemptinterest" precision="13" scale="2" nullable="true"/>
+    <field name="fffarmincome" type="decimal" column="fffarmincome" precision="13" scale="2" nullable="true"/>
+    <field name="farmincome" type="decimal" column="farmincome" precision="13" scale="2" nullable="true"/>
+    <field name="mcmfarmincome" type="decimal" column="mcmfarmincome" precision="13" scale="2" nullable="true"/>
+    <field name="fftaxrefunds" type="decimal" column="fftaxrefunds" precision="13" scale="2" nullable="true"/>
+    <field name="taxrefunds" type="decimal" column="taxrefunds" precision="13" scale="2" nullable="true"/>
+    <field name="mcmtaxrefunds" type="decimal" column="mcmtaxrefunds" precision="13" scale="2" nullable="true"/>
+    <field name="ffunemploymentincome" type="decimal" column="ffunemploymentincome" precision="13" scale="2" nullable="true"/>
+    <field name="unemployincome" type="decimal" column="unemployincome" precision="13" scale="2" nullable="true">
+      <options>
+        <option name="comment">	
+</option>
+      </options>
+    </field>
+    <field name="mcmunemploymentincome" type="decimal" column="mcmunemploymentincome" precision="13" scale="2" nullable="true"/>
+    <field name="ffalimony" type="decimal" column="ffalimony" precision="13" scale="2" nullable="true"/>
+    <field name="alimony" type="decimal" column="alimony" precision="13" scale="2" nullable="true"/>
+    <field name="mcmalimony" type="decimal" column="mcmalimony" precision="13" scale="2" nullable="true"/>
+    <field name="ffotherincome" type="decimal" column="ffotherincome" precision="13" scale="2" nullable="true"/>
+    <field name="otherincome" type="decimal" column="otherincome" precision="13" scale="2" nullable="true"/>
+    <field name="mcmotherincome" type="decimal" column="mcmotherincome" precision="13" scale="2" nullable="true"/>
+    <field name="ffmagideductions" type="decimal" column="ffmagideductions" precision="13" scale="2" nullable="true"/>
+    <field name="magideductions" type="decimal" column="magideductions" precision="13" scale="2" nullable="true"/>
+    <field name="mcmmagideductions" type="decimal" column="mcmmagideductions" precision="13" scale="2" nullable="true"/>
+    <field name="dod" type="decimal" column="dod" precision="13" scale="2" nullable="true"/>
+    <field name="numchildren" type="smallint" column="numchildren" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="isclaimedoos" type="string" column="isclaimedoos" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="priorinsuranceenddate" type="date" column="priorinsuranceenddate" nullable="true"/>
+    <field name="hadfostermedicaid" type="string" column="hadfostermedicaid" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ageleftfoster" type="smallint" column="ageleftfoster" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fosterstatecd" type="string" column="fosterstatecd" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lawllyfullypresent" type="string" column="lawllyfullypresent" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="immigrationstatus" type="string" column="immigrationstatus" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="iseligible" type="string" column="iseligible" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="americanstatus" type="string" column="americanstatus" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="vetstatus" type="string" column="vetstatus" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="trafffickingvictim" type="string" column="trafffickingvictim" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="immigrationdate" type="date" column="immigrationdate" nullable="true"/>
+    <field name="fiveyearbar" type="string" column="fiveyearbar" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fiveyearbarmet" type="string" column="fiveyearbarmet" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fortyquaters" type="string" column="fortyquaters" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="immigrationdatetype" type="string" column="immigrationdatetype" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ffcapitalgains" type="decimal" column="ffcapitalgains" precision="13" scale="2" nullable="true"/>
+    <field name="capitalgains" type="decimal" column="capitalgains" precision="13" scale="2" nullable="true"/>
+    <field name="mcmcapitalgains" type="decimal" column="mcmcapitalgains" precision="13" scale="2" nullable="true"/>
+    <field name="agegt90" type="string" column="agegt90" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="addressstreet" type="string" column="addressstreet" length="60" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="addresscity" type="string" column="addresscity" length="35" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="addressstate" type="string" column="addressstate" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="istempoos" type="string" column="istempoos" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nofixedaddress" type="string" column="nofixedaddress" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ordinarydividends" type="decimal" column="ordinarydividends" precision="13" scale="2" nullable="true"/>
+    <field name="mcmordinarydividends" type="decimal" column="mcmordinarydividends" precision="13" scale="2" nullable="true"/>
+    <field name="taxablerefunds" type="decimal" column="taxablerefunds" precision="13" scale="2" nullable="true"/>
+    <field name="mcmtaxablerefunds" type="decimal" column="mcmtaxablerefunds" precision="13" scale="2" nullable="true"/>
+    <field name="businessincome" type="decimal" column="businessincome" precision="13" scale="2" nullable="true"/>
+    <field name="mcmbusinessincome" type="decimal" column="mcmbusinessincome" precision="13" scale="2" nullable="true"/>
+    <field name="othergains" type="decimal" column="othergains" precision="13" scale="2" nullable="true"/>
+    <field name="mcmothergains" type="decimal" column="mcmothergains" precision="13" scale="2" nullable="true"/>
+    <field name="iradistributions" type="decimal" column="iradistributions" precision="13" scale="2" nullable="true"/>
+    <field name="mcmiradistributions" type="decimal" column="mcmiradistributions" precision="13" scale="2" nullable="true"/>
+    <field name="realestateplus" type="decimal" column="realestateplus" precision="13" scale="2" nullable="true"/>
+    <field name="mcmrealestateplus" type="decimal" column="mcmrealestateplus" precision="13" scale="2" nullable="true"/>
+    <field name="unemployment" type="decimal" column="unemployment" precision="13" scale="2" nullable="true"/>
+    <field name="mcmunemployment" type="decimal" column="mcmunemployment" precision="13" scale="2" nullable="true"/>
+    <field name="socialsecurity" type="decimal" column="socialsecurity" precision="13" scale="2" nullable="true"/>
+    <field name="mcmsocialsecurity" type="decimal" column="mcmsocialsecurity" precision="13" scale="2" nullable="true"/>
+    <field name="taxablesocialsecurity" type="decimal" column="taxablesocialsecurity" precision="13" scale="2" nullable="true"/>
+    <field name="mcmtaxablesocialsecurity" type="decimal" column="mcmtaxablesocialsecurity" precision="13" scale="2" nullable="true"/>
+    <field name="educatorexpenses" type="decimal" column="educatorexpenses" precision="13" scale="2" nullable="true"/>
+    <field name="businessexpenses" type="decimal" column="businessexpenses" precision="13" scale="2" nullable="true"/>
+    <field name="healthsavingdeductions" type="decimal" column="healthsavingdeductions" precision="13" scale="2" nullable="true"/>
+    <field name="movingexpenses" type="decimal" column="movingexpenses" precision="13" scale="2" nullable="true"/>
+    <field name="selfemploytaxdeduction" type="decimal" column="selfemploytaxdeduction" precision="13" scale="2" nullable="true"/>
+    <field name="selfemployplans" type="decimal" column="selfemployplans" precision="13" scale="2" nullable="true"/>
+    <field name="selfemployinsdeductions" type="decimal" column="selfemployinsdeductions" precision="13" scale="2" nullable="true"/>
+    <field name="withdrawalpenalty" type="decimal" column="withdrawalpenalty" precision="13" scale="2" nullable="true"/>
+    <field name="alimonypaid" type="decimal" column="alimonypaid" precision="13" scale="2" nullable="true"/>
+    <field name="iradeductions" type="decimal" column="iradeductions" precision="13" scale="2" nullable="true"/>
+    <field name="studentloanintdeductions" type="decimal" column="studentloanintdeductions" precision="13" scale="2" nullable="true"/>
+    <field name="tution" type="decimal" column="tution" precision="13" scale="2" nullable="true"/>
+    <field name="domproductiondeduction" type="decimal" column="domproductiondeduction" precision="13" scale="2" nullable="true"/>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="nativeamerican" type="string" column="nativeamerican" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tobaccouser" type="string" column="tobaccouser" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="addresszip" type="string" column="addresszip" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <one-to-one field="personid" target-entity="Person" fetch="LAZY">
+      <join-columns>
+        <join-column name="personid" referenced-column-name="personid"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

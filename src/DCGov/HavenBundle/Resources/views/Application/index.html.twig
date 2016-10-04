@@ -1,0 +1,648 @@
+{% extends 'DCGovHavenBundle::base.html.twig' %}
+
+{% set current_month = "now"|date("m") %}
+{% set current_day = "now"|date("d") %}
+{% set current_year = "now"|date("Y") %}
+
+{% block body %}
+{{ parent() }}
+
+<form class="form-horizontal" id="frmApplication" 
+	action="{{ path('dc_gov_haven_application_save') }}" method="post">		
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="applicationName" class="col-md-6 control-label">*Application Name:</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" id="application_name" name="application_name"
+						value="{{ app.user.firstname }}-{{ [current_month, current_day, current_year] | join }}"
+						placeholder="Application Name" 
+						{% if applicationid > 0 %}
+							disabled
+						{% else %}
+						required autofocus
+						{% endif %}
+						/>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="applicationDate" class="col-md-5 control-label">Application Date:</label>
+				<div class="col-md-7 form-inline">
+				{% if applicationid > 0 %}
+					<input type="text" class="form-control" value="{{ application.postdate | date('m-d-Y') }}" readonly>
+				{% else %}
+						
+					<select name="application_month" id="application_month"
+						title="Month" class="form-control">
+						{% for j in range(1, 12) %}
+                            <option value="{{ j }}" {% if j == current_month %} selected {% endif %}>{{ date('2012-' ~ j ~ '-01') |date('M') }}</option>
+                        {% endfor %}
+						
+					</select> / 
+					<select name="application_day" id="application_day"
+						class="form-control">
+						
+						{% for day in 1..31 %}
+						{% if day == current_day %}
+						<option value="{{ day }}" selected>{{ day }}</option>
+						{% else %}
+						<option value="{{ day }}">{{ day }}</option>
+						{% endif %}
+						{% endfor %}
+					</select> / 
+					<select name="application_year" id="application_year"
+						class="form-control" >
+						<option value="">Year</option>
+						{% for year in (current_year-3)..current_year %}
+							{% if year == current_year %}
+								<option value="{{ year }}" selected>{{ year }}</option>
+							{% else %}
+								<option value="{{ year }}">{{ year }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="istestapp">Test App?:</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="istestapp" name="istestapp"
+					{% if applicationid > 0 %}
+						
+						readonly  
+					{% endif %}
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- first row -->
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="ICNumber" class="col-md-6 control-label">IC
+					Number:</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" id="ic_number" name="ic_number"
+						placeholder="IC Number" 
+					{% if applicationid > 0 %}
+						value = "{{ application.icnumber }}"
+						readonly  
+					{% endif %}
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="csl_number" class="col-md-5 control-label">CSL Number:</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" id="csl_number" name="csl_number"
+						placeholder="CSL Number" 
+					{% if applicationid > 0 %}
+						
+						readonly  
+					{% endif %}
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="request_type" class="col-md-5 control-label">Request Type:</label>
+				<div class="col-md-7 form-inline">
+					<input list="request_types" name="request_type" id="request_type"
+					{% if applicationid > 0 %}
+						value = "{{ application.requesttype }}"	
+						readonly  
+					{% endif %}
+					>
+                      <datalist id="request_types">
+                         {% for type in request_types %}
+        			    	 <option value="{{ type['requesttype'] }}">
+        			    {% endfor %}
+                        
+                      </datalist>
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- second row -->
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			<div class="form-group">
+				<label for="comments" class="col-md-3 control-label">Comments:</label>
+				<div class="col-md-9">
+					<textarea class="form-control" id="comments" name="comments">
+					
+					{% if applicationid > 0 %}
+						{{ application.comments }}	
+						  
+					{% endif %}
+					</textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="firstname" class="col-md-6 control-label">*First Name:</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" id="firstname" name="firstname"
+						placeholder="First Name" required>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="lastname" class="col-md-5 control-label">*Last Name:</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" id="lastname" name="lastname"
+						placeholder="Last Name" required>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="gender" class="col-md-5 control-label">Gender:</label>
+				<div class="col-md-7 form-inline">
+					<select class="form-control" id="gender" name="gender">
+						<option value="">Gender</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="street" class="col-md-6 control-label">Address:</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" id="street" name="street"
+						placeholder="Street">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="city" class="col-md-5 control-label">City:</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" id="city" name="city"
+						placeholder="City">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="state" class="col-md-5 control-label">*State:</label>
+				<div class="col-md-7 form-inline">
+					<select name="state" class="form-control" id="state" required>
+						<option value="DC" selected>District of Columbia</option><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="RI">Rhode Island</option><option value="PA">Pennsylvania</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- row -->
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="ssn" class="col-md-6 control-label">SSN:</label>
+				<div class="col-md-6">
+					<input type="number" class="form-control" id="ssn" name="ssn"
+						placeholder="SSN" >
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="dateOfBirth" class="col-md-5 control-label">*DOB:</label>
+				<div class="col-md-7 form-inline">
+					<select name="dob_month" id="dob_month" class="form-control" required>
+						<option value="" selected="1">Month</option>
+						{% for j in range(1, 12) %}
+                            <option value="{{ j }}" >{{ date('2012-' ~ j ~ '-01') |date('M') }}</option>
+                        {% endfor %}
+					</select> / 
+					<select name="dob_day" id="dob_day" class="form-control" required>
+						<option value="" required>Day</option>
+						{% for day in 1..31 %}
+							<option value="{{ day }}">{{ day }}</option>
+						{% endfor %}
+					</select> / 
+					<select name="dob_year" id="dob_year" class="form-control" required>
+						<option value="" required>Year</option>
+						{% for year in 1900..current_year %}
+							<option value="{{ year }}">{{ year }}</option>
+						{% endfor %}
+					</select>
+					<span id="spanAge"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4" id="col_isinfostercare">
+			<div class="form-group">
+				<label for="isinfostercare" class="col-md-5 control-label">Formerly in foster care:</label>
+				<div class="col-md-7">
+					<input id="isinfostercare" name="isinfostercare" type="checkbox" >
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	<div class="row">
+		
+		<div class="col-xs-12 col-md-4" id="col_hadmedicaidinfostercare">
+			<div class="form-group">
+				<label for="hadmedicaidinfostercare" class="col-md-6 control-label">Had Medicaid during foster care:</label>
+				<div class="col-md-6">
+					<input id="hadmedicaidinfostercare" name="hadmedicaidinfostercare" type="checkbox" >
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4" id="col_ageleftfostercare">
+			<div class="form-group">
+				<label for="ageleftfostercare" class="col-md-5 control-label">Age Left Foster Care:</label>
+				<div class="col-md-7">
+					<input id="ageleftfostercare" name="ageleftfostercare" type="text" >
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4" id="col_fostercarestate">
+			<div class="form-group">
+				<label for="fostercarestate" class="col-md-5 control-label">Foster Care State:</label>
+				<div class="col-md-7 form-inline">
+					<select name="fostercarestate" class="form-control" id="fostercarestate">
+						<option value="">Select State</option><option value="DC">District of Columbia</option><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="RI">Rhode Island</option><option value="PA">Pennsylvania</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- row -->
+	<div class="row hidden" id="toggle-on-state">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6" for="istemp-out-state">Temporarily out of state: </label>
+					<div class="col-md-6">
+						<input id="istemp-out-state" name="istemp-out-state" type="checkbox" >
+					</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">				
+				<label class="col-md-5" for="isno_fixed_address">No Fixed Address:</label>
+				<div class="col-md-7">
+					<input id="isno_fixed_address" name="isno_fixed_address" type="checkbox" >
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6 control-label" for="isapplyinsurance">Is this person applying for insurance?</label>
+				<div class="col-md-6">
+					<input type="checkbox" id="isapplyinsurance" name="isapplyinsurance" checked>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="isstudent">Student?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="isstudent" name="isstudent">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="isdisabled">Blind,
+					disabled, needs long-term care?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="isdisabled" name="isdisabled">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6 control-label" for="care-chk">Claimed
+					as dependent by someone not on this application?</label>
+				<div class="col-md-6">
+					<input type="checkbox" id="isclaimedasdependent" name="isclaimedasdependent">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4" id="col_isclaimeroutofstate">
+			<div id="toggle-on-claimed-chkbox" class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="isclaimeroutofstate">Claimer
+					lives out of state?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="isclaimeroutofstate" name="isclaimeroutofstate">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6 control-label" for="iseligibleforinsurance">Eligible
+					for other insurance?</label>
+				<div class="col-md-6">
+					<input type="checkbox" id="iseligibleforinsurance" name="iseligibleforinsurance">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="enddate" class="col-md-5 control-label">Other
+					Insurance end date:</label>
+				<div class="col-md-7 form-inline">
+					<select class="form-control" name="insurance_enddate_month">
+						<option value="">Month</option>
+						{% for j in range(1, 12) %}
+                            <option value="{{ j }}" >{{ date('2012-' ~ j ~ '-01') |date('M') }}</option>
+                        {% endfor %}
+					</select> / 
+					<select class="form-control" name="insurance_enddate_day">
+						<option value="">Day</option>
+						{% for day in 1..31 %}
+							<option value="{{ day }}">{{ day }}</option>
+						{% endfor %}
+					</select> / 
+					<select class="form-control" name="insurance_enddate_year">
+						<option value="">Year</option>
+						{% for year in current_year..(current_year+5) %}
+							<option value="{{ year }}">{{ year }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6 control-label" for="ispregnantinpast3months">Pregnant within the last 3 months?</label>
+				<div class="col-md-6">
+					<input type="checkbox" id="ispregnantinpast3months" name="ispregnantinpast3months">
+				</div>
+
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="ispregnant">Pregnant?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="ispregnant" name="ispregnant">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4" id="col_numberofchildren">
+			<div class="form-group">
+				<label for="numberofchildren" class="col-md-5 control-label">Children Expected</label>
+				<div class="col-md-7 form-inline">
+					<select class="form-control" name="numberofchildren" id="numberofchildren">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6 control-label" for="native-chk">Native American?</label>
+				<div class="col-md-6">
+					<input type="checkbox" id="isnative" name="isnative">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label for="immigrationstatus" class="col-md-5 control-label">*Citizen Status:</label>
+				<div class="col-md-7 form-inline">
+					<select class="form-control" id="immigrationstatus" name="immigrationstatus" required>
+						<option value="">Select</option>
+						<option value="1">U.S. Citizen</option>
+						<option value="2">Lawfully Present</option>
+						<option value="3">Not Lawfully Present</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="isincarcerated">Incarcerated?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="incarcerated" name="isincarcerated">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	<div class="row" id="col_lawfullypresent">
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-6 control-label" for="veteran">Veteran Status</label>
+				<div class="col-md-6">
+					<input type="checkbox" id="isveteran" name="isveteran">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="five-year-chk">Five Year Bar applies?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="isfiveyearbar" name="isfiveyearbar">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group cursor-pointer">
+				<label class="col-md-5 control-label" for="isfiveyearmet">Has Five Year Bar met?</label>
+				<div class="col-md-7">
+					<input type="checkbox" id="isfiveyearmet" name="isfiveyearmet">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<!-- Income Calculator Link -->
+    	<div class="col-xs-12 col-md-2">
+    		<div class="form-group">
+    			<a href="#" class="btn btn-success btn-block"
+    				data-toggle="modal" data-target="#incomeModal"> 
+    				<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Calculate Income
+    			</a>
+    		</div>
+    	</div>
+    	
+    	<!-- Income Table Link -->
+    	<div class="col-xs-12 col-md-2" id="col_incometable">
+    		<div class="form-group">
+    			<a href="#custom_incomeTable" class="btn btn-success btn-block"
+    				data-toggle="collapse"> 
+    				<span class="glyphicon glyphicon-th"></span>&nbsp;Custom Income Entries
+    			</a>
+    		</div>
+    	</div>
+    </div>
+    
+	<!-- Income Table -->
+	<div class="collapse fade" id="custom_incomeTable">
+    	<div class="col-xs-12 col-md-12">
+    		<div class="table-responsive">
+    			<table id="tblCustomIncome" class="table table-hover table-bordered table-striped-no table-condensed">
+    				<thead>
+    					<tr>
+    						<th>Delete</th>
+    						<th>Income Type</th>
+    						<th>Pay Period</th>
+    						<th>Income</th>
+    						<th>Start Date</th>
+    						<th>End Date</th>
+    						<th>Annual Income</th>
+    						<th>Medicaid Monthly</th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    				</tbody>
+    			</table>
+    		</div>
+		</div>
+		<!-- Delete Button -->
+    	<div class="col-xs-12 col-md-2">
+    		<div class="form-group">
+    			<button id="btnDeleteCustomIncome" type="button" class="btn btn-danger" disabled>Delete</button>
+    		</div>
+    	</div>
+    </div>
+    
+	<!-- Income Entry -->
+	{% include 'DCGovHavenBundle:Application:income.html.twig' %}
+	
+	<!-- Adjustment Entry -->
+	{% include 'DCGovHavenBundle:Application:adjustment.html.twig' %}
+	
+	{% if applicationid > 0 %}
+	<div class="row">
+		<!-- Applicants Relationships -->
+		
+    	<div class="col-xs-12 col-md-12">
+    		<div class="table-responsive">
+    			<table id="tblApplicantsRelationship" class="table table-hover table-bordered table-striped-no table-condensed">
+    				<thead>
+    					<tr>
+    						<th>Delete</th>
+    						<th>Income Type</th>
+    						<th>Pay Period</th>
+    						<th>Income</th>
+    						<th>Start Date</th>
+    						<th>End Date</th>
+    						<th>Annual Income</th>
+    						<th>Medicaid Monthly</th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    				</tbody>
+    			</table>
+    		</div>
+		</div>
+    </div>
+		The person {{ [ap[i].firstname, ap[i].lasstname] | join(' ') }}
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="tax_return" class="col-md-6 control-label">*Tax Return:</label>
+				<div class="col-md-6">
+					<select name="tax_return" class="form-control" required>
+						<option value=""></option>
+						<option value="1">Tax Return: 1</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	{%  else %}
+	<div class="row">	
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="tax_return" class="col-md-6 control-label">*Tax Return:</label>
+				<div class="col-md-6">
+					<select name="tax_return" class="form-control" required>
+						<option value=""></option>
+						<option value="1">Tax Return: 1</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group">
+				<label for="taxfilertype" class="col-md-5 control-label">*Filer Type:</label>
+				<div class="col-md-7 form-inline">
+					<select name="taxfilertype" id="taxfilertype" class="form-control" required>
+						<option value=""></option>
+						<option value="Filers">Filer</option>
+						<option value="Dependents">Dependent</option>
+						<option value="none">Non-filer</option>
+						
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>	
+	{% endif %}
+	
+	<div class="spacer-10">&nbsp;</div>
+	
+	<div class="row">
+		<div class="col-xs-12 col-md-12 text-center ">
+			<div class="btn-group">
+				<input type="button" class="btn btn-danger btn-lg btn-block" value="Reset">
+			</div>
+			<div class="btn-group">
+				<input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	
+	<input type="hidden" id="applicationid" name="applicationid" value="{{ applicationid }}">
+	<input type="hidden" id="hoursworked" name="hoursworked" value="0">
+</form>
+
+<!-- Include Modal block for Income Calculator -->
+{% include 'DCGovHavenBundle:Application:income-calculator.html.twig' %}
+
+{% endblock body %}

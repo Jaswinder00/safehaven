@@ -1,0 +1,12 @@
+personincome_index:
+    path:     /
+    defaults: { _controller: "DCGovHavenBundle:PersonIncome:index" }
+    methods:  GET
+
+personincome_show:
+    path:     /{id}/show
+    defaults: { _controller: "DCGovHavenBundle:PersonIncome:show" }
+    methods:  GET
+
+
+

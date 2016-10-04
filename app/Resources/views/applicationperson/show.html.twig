@@ -1,0 +1,468 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ApplicationPerson</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Isapplicant</th>
+                <td>{{ applicationPerson.isapplicant }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ applicationPerson.name }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ applicationPerson.age }}</td>
+            </tr>
+            <tr>
+                <th>Hrsworked</th>
+                <td>{{ applicationPerson.hrsworked }}</td>
+            </tr>
+            <tr>
+                <th>Isdisabled</th>
+                <td>{{ applicationPerson.isdisabled }}</td>
+            </tr>
+            <tr>
+                <th>Isstudent</th>
+                <td>{{ applicationPerson.isstudent }}</td>
+            </tr>
+            <tr>
+                <th>Ismedicareentitled</th>
+                <td>{{ applicationPerson.ismedicareentitled }}</td>
+            </tr>
+            <tr>
+                <th>Isstateresident</th>
+                <td>{{ applicationPerson.isstateresident }}</td>
+            </tr>
+            <tr>
+                <th>Isltcattest</th>
+                <td>{{ applicationPerson.isltcattest }}</td>
+            </tr>
+            <tr>
+                <th>Isotherclaimed</th>
+                <td>{{ applicationPerson.isotherclaimed }}</td>
+            </tr>
+            <tr>
+                <th>Isinsured</th>
+                <td>{{ applicationPerson.isinsured }}</td>
+            </tr>
+            <tr>
+                <th>Ispriorinsured</th>
+                <td>{{ applicationPerson.ispriorinsured }}</td>
+            </tr>
+            <tr>
+                <th>Ispublicempbenefit</th>
+                <td>{{ applicationPerson.ispublicempbenefit }}</td>
+            </tr>
+            <tr>
+                <th>Isfomerfoster</th>
+                <td>{{ applicationPerson.isfomerfoster }}</td>
+            </tr>
+            <tr>
+                <th>Ispregnenant</th>
+                <td>{{ applicationPerson.ispregnenant }}</td>
+            </tr>
+            <tr>
+                <th>Islast3pregnant</th>
+                <td>{{ applicationPerson.islast3pregnant }}</td>
+            </tr>
+            <tr>
+                <th>Isuscitizen</th>
+                <td>{{ applicationPerson.isuscitizen }}</td>
+            </tr>
+            <tr>
+                <th>Isincarcerated</th>
+                <td>{{ applicationPerson.isincarcerated }}</td>
+            </tr>
+            <tr>
+                <th>Istaxrequied</th>
+                <td>{{ applicationPerson.istaxrequied }}</td>
+            </tr>
+            <tr>
+                <th>Ffwages</th>
+                <td>{{ applicationPerson.ffwages }}</td>
+            </tr>
+            <tr>
+                <th>Wages</th>
+                <td>{{ applicationPerson.wages }}</td>
+            </tr>
+            <tr>
+                <th>Mcmwages</th>
+                <td>{{ applicationPerson.mcmwages }}</td>
+            </tr>
+            <tr>
+                <th>Fftaxableinterest</th>
+                <td>{{ applicationPerson.fftaxableinterest }}</td>
+            </tr>
+            <tr>
+                <th>Taxableinterest</th>
+                <td>{{ applicationPerson.taxableinterest }}</td>
+            </tr>
+            <tr>
+                <th>Mcmtaxableinterest</th>
+                <td>{{ applicationPerson.mcmtaxableinterest }}</td>
+            </tr>
+            <tr>
+                <th>Ffpentionannuities</th>
+                <td>{{ applicationPerson.ffpentionannuities }}</td>
+            </tr>
+            <tr>
+                <th>Pensionannuities</th>
+                <td>{{ applicationPerson.pensionannuities }}</td>
+            </tr>
+            <tr>
+                <th>Mcmpentionannuities</th>
+                <td>{{ applicationPerson.mcmpentionannuities }}</td>
+            </tr>
+            <tr>
+                <th>Fftaxexemptinterest</th>
+                <td>{{ applicationPerson.fftaxexemptinterest }}</td>
+            </tr>
+            <tr>
+                <th>Taxexemptinterest</th>
+                <td>{{ applicationPerson.taxexemptinterest }}</td>
+            </tr>
+            <tr>
+                <th>Mcmtaxexemptinterest</th>
+                <td>{{ applicationPerson.mcmtaxexemptinterest }}</td>
+            </tr>
+            <tr>
+                <th>Fffarmincome</th>
+                <td>{{ applicationPerson.fffarmincome }}</td>
+            </tr>
+            <tr>
+                <th>Farmincome</th>
+                <td>{{ applicationPerson.farmincome }}</td>
+            </tr>
+            <tr>
+                <th>Mcmfarmincome</th>
+                <td>{{ applicationPerson.mcmfarmincome }}</td>
+            </tr>
+            <tr>
+                <th>Fftaxrefunds</th>
+                <td>{{ applicationPerson.fftaxrefunds }}</td>
+            </tr>
+            <tr>
+                <th>Taxrefunds</th>
+                <td>{{ applicationPerson.taxrefunds }}</td>
+            </tr>
+            <tr>
+                <th>Mcmtaxrefunds</th>
+                <td>{{ applicationPerson.mcmtaxrefunds }}</td>
+            </tr>
+            <tr>
+                <th>Ffunemploymentincome</th>
+                <td>{{ applicationPerson.ffunemploymentincome }}</td>
+            </tr>
+            <tr>
+                <th>Unemployincome</th>
+                <td>{{ applicationPerson.unemployincome }}</td>
+            </tr>
+            <tr>
+                <th>Mcmunemploymentincome</th>
+                <td>{{ applicationPerson.mcmunemploymentincome }}</td>
+            </tr>
+            <tr>
+                <th>Ffalimony</th>
+                <td>{{ applicationPerson.ffalimony }}</td>
+            </tr>
+            <tr>
+                <th>Alimony</th>
+                <td>{{ applicationPerson.alimony }}</td>
+            </tr>
+            <tr>
+                <th>Mcmalimony</th>
+                <td>{{ applicationPerson.mcmalimony }}</td>
+            </tr>
+            <tr>
+                <th>Ffotherincome</th>
+                <td>{{ applicationPerson.ffotherincome }}</td>
+            </tr>
+            <tr>
+                <th>Otherincome</th>
+                <td>{{ applicationPerson.otherincome }}</td>
+            </tr>
+            <tr>
+                <th>Mcmotherincome</th>
+                <td>{{ applicationPerson.mcmotherincome }}</td>
+            </tr>
+            <tr>
+                <th>Ffmagideductions</th>
+                <td>{{ applicationPerson.ffmagideductions }}</td>
+            </tr>
+            <tr>
+                <th>Magideductions</th>
+                <td>{{ applicationPerson.magideductions }}</td>
+            </tr>
+            <tr>
+                <th>Mcmmagideductions</th>
+                <td>{{ applicationPerson.mcmmagideductions }}</td>
+            </tr>
+            <tr>
+                <th>Dod</th>
+                <td>{{ applicationPerson.dod }}</td>
+            </tr>
+            <tr>
+                <th>Ssn</th>
+                <td>{{ applicationPerson.ssn }}</td>
+            </tr>
+            <tr>
+                <th>Numchildren</th>
+                <td>{{ applicationPerson.numchildren }}</td>
+            </tr>
+            <tr>
+                <th>Isclaimedoos</th>
+                <td>{{ applicationPerson.isclaimedoos }}</td>
+            </tr>
+            <tr>
+                <th>Priorinsuranceenddate</th>
+                <td>{% if applicationPerson.priorinsuranceenddate %}{{ applicationPerson.priorinsuranceenddate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Hadfostermedicaid</th>
+                <td>{{ applicationPerson.hadfostermedicaid }}</td>
+            </tr>
+            <tr>
+                <th>Ageleftfoster</th>
+                <td>{{ applicationPerson.ageleftfoster }}</td>
+            </tr>
+            <tr>
+                <th>Fosterstatecd</th>
+                <td>{{ applicationPerson.fosterstatecd }}</td>
+            </tr>
+            <tr>
+                <th>Lawllyfullypresent</th>
+                <td>{{ applicationPerson.lawllyfullypresent }}</td>
+            </tr>
+            <tr>
+                <th>Immigrationstatus</th>
+                <td>{{ applicationPerson.immigrationstatus }}</td>
+            </tr>
+            <tr>
+                <th>Iseligible</th>
+                <td>{{ applicationPerson.iseligible }}</td>
+            </tr>
+            <tr>
+                <th>Americanstatus</th>
+                <td>{{ applicationPerson.americanstatus }}</td>
+            </tr>
+            <tr>
+                <th>Vetstatus</th>
+                <td>{{ applicationPerson.vetstatus }}</td>
+            </tr>
+            <tr>
+                <th>Trafffickingvictim</th>
+                <td>{{ applicationPerson.trafffickingvictim }}</td>
+            </tr>
+            <tr>
+                <th>Immigrationdate</th>
+                <td>{% if applicationPerson.immigrationdate %}{{ applicationPerson.immigrationdate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fiveyearbar</th>
+                <td>{{ applicationPerson.fiveyearbar }}</td>
+            </tr>
+            <tr>
+                <th>Fiveyearbarmet</th>
+                <td>{{ applicationPerson.fiveyearbarmet }}</td>
+            </tr>
+            <tr>
+                <th>Fortyquaters</th>
+                <td>{{ applicationPerson.fortyquaters }}</td>
+            </tr>
+            <tr>
+                <th>Immigrationdatetype</th>
+                <td>{{ applicationPerson.immigrationdatetype }}</td>
+            </tr>
+            <tr>
+                <th>Ffcapitalgains</th>
+                <td>{{ applicationPerson.ffcapitalgains }}</td>
+            </tr>
+            <tr>
+                <th>Capitalgains</th>
+                <td>{{ applicationPerson.capitalgains }}</td>
+            </tr>
+            <tr>
+                <th>Mcmcapitalgains</th>
+                <td>{{ applicationPerson.mcmcapitalgains }}</td>
+            </tr>
+            <tr>
+                <th>Agegt90</th>
+                <td>{{ applicationPerson.agegt90 }}</td>
+            </tr>
+            <tr>
+                <th>Addressstreet</th>
+                <td>{{ applicationPerson.addressstreet }}</td>
+            </tr>
+            <tr>
+                <th>Addresscity</th>
+                <td>{{ applicationPerson.addresscity }}</td>
+            </tr>
+            <tr>
+                <th>Addressstate</th>
+                <td>{{ applicationPerson.addressstate }}</td>
+            </tr>
+            <tr>
+                <th>Istempoos</th>
+                <td>{{ applicationPerson.istempoos }}</td>
+            </tr>
+            <tr>
+                <th>Nofixedaddress</th>
+                <td>{{ applicationPerson.nofixedaddress }}</td>
+            </tr>
+            <tr>
+                <th>Ordinarydividends</th>
+                <td>{{ applicationPerson.ordinarydividends }}</td>
+            </tr>
+            <tr>
+                <th>Mcmordinarydividends</th>
+                <td>{{ applicationPerson.mcmordinarydividends }}</td>
+            </tr>
+            <tr>
+                <th>Taxablerefunds</th>
+                <td>{{ applicationPerson.taxablerefunds }}</td>
+            </tr>
+            <tr>
+                <th>Mcmtaxablerefunds</th>
+                <td>{{ applicationPerson.mcmtaxablerefunds }}</td>
+            </tr>
+            <tr>
+                <th>Businessincome</th>
+                <td>{{ applicationPerson.businessincome }}</td>
+            </tr>
+            <tr>
+                <th>Mcmbusinessincome</th>
+                <td>{{ applicationPerson.mcmbusinessincome }}</td>
+            </tr>
+            <tr>
+                <th>Othergains</th>
+                <td>{{ applicationPerson.othergains }}</td>
+            </tr>
+            <tr>
+                <th>Mcmothergains</th>
+                <td>{{ applicationPerson.mcmothergains }}</td>
+            </tr>
+            <tr>
+                <th>Iradistributions</th>
+                <td>{{ applicationPerson.iradistributions }}</td>
+            </tr>
+            <tr>
+                <th>Mcmiradistributions</th>
+                <td>{{ applicationPerson.mcmiradistributions }}</td>
+            </tr>
+            <tr>
+                <th>Realestateplus</th>
+                <td>{{ applicationPerson.realestateplus }}</td>
+            </tr>
+            <tr>
+                <th>Mcmrealestateplus</th>
+                <td>{{ applicationPerson.mcmrealestateplus }}</td>
+            </tr>
+            <tr>
+                <th>Unemployment</th>
+                <td>{{ applicationPerson.unemployment }}</td>
+            </tr>
+            <tr>
+                <th>Mcmunemployment</th>
+                <td>{{ applicationPerson.mcmunemployment }}</td>
+            </tr>
+            <tr>
+                <th>Socialsecurity</th>
+                <td>{{ applicationPerson.socialsecurity }}</td>
+            </tr>
+            <tr>
+                <th>Mcmsocialsecurity</th>
+                <td>{{ applicationPerson.mcmsocialsecurity }}</td>
+            </tr>
+            <tr>
+                <th>Taxablesocialsecurity</th>
+                <td>{{ applicationPerson.taxablesocialsecurity }}</td>
+            </tr>
+            <tr>
+                <th>Mcmtaxablesocialsecurity</th>
+                <td>{{ applicationPerson.mcmtaxablesocialsecurity }}</td>
+            </tr>
+            <tr>
+                <th>Educatorexpenses</th>
+                <td>{{ applicationPerson.educatorexpenses }}</td>
+            </tr>
+            <tr>
+                <th>Businessexpenses</th>
+                <td>{{ applicationPerson.businessexpenses }}</td>
+            </tr>
+            <tr>
+                <th>Healthsavingdeductions</th>
+                <td>{{ applicationPerson.healthsavingdeductions }}</td>
+            </tr>
+            <tr>
+                <th>Movingexpenses</th>
+                <td>{{ applicationPerson.movingexpenses }}</td>
+            </tr>
+            <tr>
+                <th>Selfemploytaxdeduction</th>
+                <td>{{ applicationPerson.selfemploytaxdeduction }}</td>
+            </tr>
+            <tr>
+                <th>Selfemployplans</th>
+                <td>{{ applicationPerson.selfemployplans }}</td>
+            </tr>
+            <tr>
+                <th>Selfemployinsdeductions</th>
+                <td>{{ applicationPerson.selfemployinsdeductions }}</td>
+            </tr>
+            <tr>
+                <th>Withdrawalpenalty</th>
+                <td>{{ applicationPerson.withdrawalpenalty }}</td>
+            </tr>
+            <tr>
+                <th>Alimonypaid</th>
+                <td>{{ applicationPerson.alimonypaid }}</td>
+            </tr>
+            <tr>
+                <th>Iradeductions</th>
+                <td>{{ applicationPerson.iradeductions }}</td>
+            </tr>
+            <tr>
+                <th>Studentloanintdeductions</th>
+                <td>{{ applicationPerson.studentloanintdeductions }}</td>
+            </tr>
+            <tr>
+                <th>Tution</th>
+                <td>{{ applicationPerson.tution }}</td>
+            </tr>
+            <tr>
+                <th>Domproductiondeduction</th>
+                <td>{{ applicationPerson.domproductiondeduction }}</td>
+            </tr>
+            <tr>
+                <th>Timestamp</th>
+                <td>{% if applicationPerson.timestamp %}{{ applicationPerson.timestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nativeamerican</th>
+                <td>{{ applicationPerson.nativeamerican }}</td>
+            </tr>
+            <tr>
+                <th>Tobaccouser</th>
+                <td>{{ applicationPerson.tobaccouser }}</td>
+            </tr>
+            <tr>
+                <th>Addresszip</th>
+                <td>{{ applicationPerson.addresszip }}</td>
+            </tr>
+            <tr>
+                <th>Personid</th>
+                <td>{{ applicationPerson.personid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('applicationperson_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

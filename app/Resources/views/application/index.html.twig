@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Application list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Statecd</th>
+                <th>Year</th>
+                <th>Name</th>
+                <th>Postdate</th>
+                <th>Status</th>
+                <th>Statustimestamp</th>
+                <th>Addressstreet</th>
+                <th>Addresscity</th>
+                <th>Addressstate</th>
+                <th>Requesttype</th>
+                <th>Erflag</th>
+                <th>Edpflag</th>
+                <th>Icnumber</th>
+                <th>Comments</th>
+                <th>Createdtimestamp</th>
+                <th>Createdby</th>
+                <th>Applicationid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+            <tr>
+                <td><a href="{{ path('application_show', { 'id': application.applicationid }) }}">{{ application.statecd }}</a></td>
+                <td>{{ application.year }}</td>
+                <td>{{ application.name }}</td>
+                <td>{% if application.postdate %}{{ application.postdate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ application.status }}</td>
+                <td>{% if application.statustimestamp %}{{ application.statustimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ application.addressstreet }}</td>
+                <td>{{ application.addresscity }}</td>
+                <td>{{ application.addressstate }}</td>
+                <td>{{ application.requesttype }}</td>
+                <td>{{ application.erFlag }}</td>
+                <td>{{ application.edpFlag }}</td>
+                <td>{{ application.icnumber }}</td>
+                <td>{{ application.comments }}</td>
+                <td>{% if application.createdTimestamp %}{{ application.createdTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ application.createdBy }}</td>
+                <td>{{ application.applicationid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('application_show', { 'id': application.applicationid }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

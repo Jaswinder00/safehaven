@@ -15,6 +15,8 @@ class DefaultController extends Controller
     		return $this->redirectToRoute('login');
     	}
         
+    	//Get unique application request types
     	return $this->render('DCGovHavenBundle:Default:index.html.twig');
     }
+    
 }

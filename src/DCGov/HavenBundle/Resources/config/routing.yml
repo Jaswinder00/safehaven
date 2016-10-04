@@ -19,5 +19,33 @@ dc_gov_haven_identry:
     prefix:   /identry
 
 dc_gov_haven_report:
-        resource: "@DCGovHavenBundle/Resources/config/routing/report.yml"
-        prefix:   /report    
+    resource: "@DCGovHavenBundle/Resources/config/routing/report.yml"
+    prefix:   /report
+
+dc_gov_haven_application_new:
+    path:      /application/new
+    defaults:  { _controller: "DCGovHavenBundle:CustomApplication:new" }
+
+dc_gov_haven_application_view:
+    path:      /application/view
+    defaults:  { _controller: "DCGovHavenBundle:CustomApplication:view" }
+    
+dc_gov_haven_application_save:
+    path:      /application/save
+    defaults:  { _controller: "DCGovHavenBundle:CustomApplication:save" }
+
+dc_gov_haven_dev_person:
+    resource: "@DCGovHavenBundle/Resources/config/routing/person.yml"
+    prefix:   /dev/person
+
+dc_gov_haven_dev_application:
+    resource: "@DCGovHavenBundle/Resources/config/routing/application.yml"
+    prefix:   /dev/application
+
+dc_gov_haven_dev_applicationperson:
+    resource: "@DCGovHavenBundle/Resources/config/routing/applicationperson.yml"
+    prefix:   /dev/applicationperson
+
+dc_gov_haven_dev_personincome:
+    resource: "@DCGovHavenBundle/Resources/config/routing/personincome.yml"
+    prefix:   /dev/personincome        

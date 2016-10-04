@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Application</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Statecd</th>
+                <td>{{ application.statecd }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ application.year }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ application.name }}</td>
+            </tr>
+            <tr>
+                <th>Postdate</th>
+                <td>{% if application.postdate %}{{ application.postdate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ application.status }}</td>
+            </tr>
+            <tr>
+                <th>Statustimestamp</th>
+                <td>{% if application.statustimestamp %}{{ application.statustimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Addressstreet</th>
+                <td>{{ application.addressstreet }}</td>
+            </tr>
+            <tr>
+                <th>Addresscity</th>
+                <td>{{ application.addresscity }}</td>
+            </tr>
+            <tr>
+                <th>Addressstate</th>
+                <td>{{ application.addressstate }}</td>
+            </tr>
+            <tr>
+                <th>Requesttype</th>
+                <td>{{ application.requesttype }}</td>
+            </tr>
+            <tr>
+                <th>Erflag</th>
+                <td>{{ application.erFlag }}</td>
+            </tr>
+            <tr>
+                <th>Edpflag</th>
+                <td>{{ application.edpFlag }}</td>
+            </tr>
+            <tr>
+                <th>Icnumber</th>
+                <td>{{ application.icnumber }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ application.comments }}</td>
+            </tr>
+            <tr>
+                <th>Createdtimestamp</th>
+                <td>{% if application.createdTimestamp %}{{ application.createdTimestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ application.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Applicationid</th>
+                <td>{{ application.applicationid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('application_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

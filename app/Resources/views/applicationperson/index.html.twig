@@ -1,0 +1,254 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ApplicationPerson list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Isapplicant</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Hrsworked</th>
+                <th>Isdisabled</th>
+                <th>Isstudent</th>
+                <th>Ismedicareentitled</th>
+                <th>Isstateresident</th>
+                <th>Isltcattest</th>
+                <th>Isotherclaimed</th>
+                <th>Isinsured</th>
+                <th>Ispriorinsured</th>
+                <th>Ispublicempbenefit</th>
+                <th>Isfomerfoster</th>
+                <th>Ispregnenant</th>
+                <th>Islast3pregnant</th>
+                <th>Isuscitizen</th>
+                <th>Isincarcerated</th>
+                <th>Istaxrequied</th>
+                <th>Ffwages</th>
+                <th>Wages</th>
+                <th>Mcmwages</th>
+                <th>Fftaxableinterest</th>
+                <th>Taxableinterest</th>
+                <th>Mcmtaxableinterest</th>
+                <th>Ffpentionannuities</th>
+                <th>Pensionannuities</th>
+                <th>Mcmpentionannuities</th>
+                <th>Fftaxexemptinterest</th>
+                <th>Taxexemptinterest</th>
+                <th>Mcmtaxexemptinterest</th>
+                <th>Fffarmincome</th>
+                <th>Farmincome</th>
+                <th>Mcmfarmincome</th>
+                <th>Fftaxrefunds</th>
+                <th>Taxrefunds</th>
+                <th>Mcmtaxrefunds</th>
+                <th>Ffunemploymentincome</th>
+                <th>Unemployincome</th>
+                <th>Mcmunemploymentincome</th>
+                <th>Ffalimony</th>
+                <th>Alimony</th>
+                <th>Mcmalimony</th>
+                <th>Ffotherincome</th>
+                <th>Otherincome</th>
+                <th>Mcmotherincome</th>
+                <th>Ffmagideductions</th>
+                <th>Magideductions</th>
+                <th>Mcmmagideductions</th>
+                <th>Dod</th>
+                <th>Ssn</th>
+                <th>Numchildren</th>
+                <th>Isclaimedoos</th>
+                <th>Priorinsuranceenddate</th>
+                <th>Hadfostermedicaid</th>
+                <th>Ageleftfoster</th>
+                <th>Fosterstatecd</th>
+                <th>Lawllyfullypresent</th>
+                <th>Immigrationstatus</th>
+                <th>Iseligible</th>
+                <th>Americanstatus</th>
+                <th>Vetstatus</th>
+                <th>Trafffickingvictim</th>
+                <th>Immigrationdate</th>
+                <th>Fiveyearbar</th>
+                <th>Fiveyearbarmet</th>
+                <th>Fortyquaters</th>
+                <th>Immigrationdatetype</th>
+                <th>Ffcapitalgains</th>
+                <th>Capitalgains</th>
+                <th>Mcmcapitalgains</th>
+                <th>Agegt90</th>
+                <th>Addressstreet</th>
+                <th>Addresscity</th>
+                <th>Addressstate</th>
+                <th>Istempoos</th>
+                <th>Nofixedaddress</th>
+                <th>Ordinarydividends</th>
+                <th>Mcmordinarydividends</th>
+                <th>Taxablerefunds</th>
+                <th>Mcmtaxablerefunds</th>
+                <th>Businessincome</th>
+                <th>Mcmbusinessincome</th>
+                <th>Othergains</th>
+                <th>Mcmothergains</th>
+                <th>Iradistributions</th>
+                <th>Mcmiradistributions</th>
+                <th>Realestateplus</th>
+                <th>Mcmrealestateplus</th>
+                <th>Unemployment</th>
+                <th>Mcmunemployment</th>
+                <th>Socialsecurity</th>
+                <th>Mcmsocialsecurity</th>
+                <th>Taxablesocialsecurity</th>
+                <th>Mcmtaxablesocialsecurity</th>
+                <th>Educatorexpenses</th>
+                <th>Businessexpenses</th>
+                <th>Healthsavingdeductions</th>
+                <th>Movingexpenses</th>
+                <th>Selfemploytaxdeduction</th>
+                <th>Selfemployplans</th>
+                <th>Selfemployinsdeductions</th>
+                <th>Withdrawalpenalty</th>
+                <th>Alimonypaid</th>
+                <th>Iradeductions</th>
+                <th>Studentloanintdeductions</th>
+                <th>Tution</th>
+                <th>Domproductiondeduction</th>
+                <th>Timestamp</th>
+                <th>Nativeamerican</th>
+                <th>Tobaccouser</th>
+                <th>Addresszip</th>
+                <th>Personid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for applicationPerson in applicationPeople %}
+            <tr>
+                <td><a href="{{ path('applicationperson_show', { 'id': applicationPerson.personid }) }}">{{ applicationPerson.isapplicant }}</a></td>
+                <td>{{ applicationPerson.name }}</td>
+                <td>{{ applicationPerson.age }}</td>
+                <td>{{ applicationPerson.hrsworked }}</td>
+                <td>{{ applicationPerson.isdisabled }}</td>
+                <td>{{ applicationPerson.isstudent }}</td>
+                <td>{{ applicationPerson.ismedicareentitled }}</td>
+                <td>{{ applicationPerson.isstateresident }}</td>
+                <td>{{ applicationPerson.isltcattest }}</td>
+                <td>{{ applicationPerson.isotherclaimed }}</td>
+                <td>{{ applicationPerson.isinsured }}</td>
+                <td>{{ applicationPerson.ispriorinsured }}</td>
+                <td>{{ applicationPerson.ispublicempbenefit }}</td>
+                <td>{{ applicationPerson.isfomerfoster }}</td>
+                <td>{{ applicationPerson.ispregnenant }}</td>
+                <td>{{ applicationPerson.islast3pregnant }}</td>
+                <td>{{ applicationPerson.isuscitizen }}</td>
+                <td>{{ applicationPerson.isincarcerated }}</td>
+                <td>{{ applicationPerson.istaxrequied }}</td>
+                <td>{{ applicationPerson.ffwages }}</td>
+                <td>{{ applicationPerson.wages }}</td>
+                <td>{{ applicationPerson.mcmwages }}</td>
+                <td>{{ applicationPerson.fftaxableinterest }}</td>
+                <td>{{ applicationPerson.taxableinterest }}</td>
+                <td>{{ applicationPerson.mcmtaxableinterest }}</td>
+                <td>{{ applicationPerson.ffpentionannuities }}</td>
+                <td>{{ applicationPerson.pensionannuities }}</td>
+                <td>{{ applicationPerson.mcmpentionannuities }}</td>
+                <td>{{ applicationPerson.fftaxexemptinterest }}</td>
+                <td>{{ applicationPerson.taxexemptinterest }}</td>
+                <td>{{ applicationPerson.mcmtaxexemptinterest }}</td>
+                <td>{{ applicationPerson.fffarmincome }}</td>
+                <td>{{ applicationPerson.farmincome }}</td>
+                <td>{{ applicationPerson.mcmfarmincome }}</td>
+                <td>{{ applicationPerson.fftaxrefunds }}</td>
+                <td>{{ applicationPerson.taxrefunds }}</td>
+                <td>{{ applicationPerson.mcmtaxrefunds }}</td>
+                <td>{{ applicationPerson.ffunemploymentincome }}</td>
+                <td>{{ applicationPerson.unemployincome }}</td>
+                <td>{{ applicationPerson.mcmunemploymentincome }}</td>
+                <td>{{ applicationPerson.ffalimony }}</td>
+                <td>{{ applicationPerson.alimony }}</td>
+                <td>{{ applicationPerson.mcmalimony }}</td>
+                <td>{{ applicationPerson.ffotherincome }}</td>
+                <td>{{ applicationPerson.otherincome }}</td>
+                <td>{{ applicationPerson.mcmotherincome }}</td>
+                <td>{{ applicationPerson.ffmagideductions }}</td>
+                <td>{{ applicationPerson.magideductions }}</td>
+                <td>{{ applicationPerson.mcmmagideductions }}</td>
+                <td>{{ applicationPerson.dod }}</td>
+                <td>{{ applicationPerson.ssn }}</td>
+                <td>{{ applicationPerson.numchildren }}</td>
+                <td>{{ applicationPerson.isclaimedoos }}</td>
+                <td>{% if applicationPerson.priorinsuranceenddate %}{{ applicationPerson.priorinsuranceenddate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ applicationPerson.hadfostermedicaid }}</td>
+                <td>{{ applicationPerson.ageleftfoster }}</td>
+                <td>{{ applicationPerson.fosterstatecd }}</td>
+                <td>{{ applicationPerson.lawllyfullypresent }}</td>
+                <td>{{ applicationPerson.immigrationstatus }}</td>
+                <td>{{ applicationPerson.iseligible }}</td>
+                <td>{{ applicationPerson.americanstatus }}</td>
+                <td>{{ applicationPerson.vetstatus }}</td>
+                <td>{{ applicationPerson.trafffickingvictim }}</td>
+                <td>{% if applicationPerson.immigrationdate %}{{ applicationPerson.immigrationdate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ applicationPerson.fiveyearbar }}</td>
+                <td>{{ applicationPerson.fiveyearbarmet }}</td>
+                <td>{{ applicationPerson.fortyquaters }}</td>
+                <td>{{ applicationPerson.immigrationdatetype }}</td>
+                <td>{{ applicationPerson.ffcapitalgains }}</td>
+                <td>{{ applicationPerson.capitalgains }}</td>
+                <td>{{ applicationPerson.mcmcapitalgains }}</td>
+                <td>{{ applicationPerson.agegt90 }}</td>
+                <td>{{ applicationPerson.addressstreet }}</td>
+                <td>{{ applicationPerson.addresscity }}</td>
+                <td>{{ applicationPerson.addressstate }}</td>
+                <td>{{ applicationPerson.istempoos }}</td>
+                <td>{{ applicationPerson.nofixedaddress }}</td>
+                <td>{{ applicationPerson.ordinarydividends }}</td>
+                <td>{{ applicationPerson.mcmordinarydividends }}</td>
+                <td>{{ applicationPerson.taxablerefunds }}</td>
+                <td>{{ applicationPerson.mcmtaxablerefunds }}</td>
+                <td>{{ applicationPerson.businessincome }}</td>
+                <td>{{ applicationPerson.mcmbusinessincome }}</td>
+                <td>{{ applicationPerson.othergains }}</td>
+                <td>{{ applicationPerson.mcmothergains }}</td>
+                <td>{{ applicationPerson.iradistributions }}</td>
+                <td>{{ applicationPerson.mcmiradistributions }}</td>
+                <td>{{ applicationPerson.realestateplus }}</td>
+                <td>{{ applicationPerson.mcmrealestateplus }}</td>
+                <td>{{ applicationPerson.unemployment }}</td>
+                <td>{{ applicationPerson.mcmunemployment }}</td>
+                <td>{{ applicationPerson.socialsecurity }}</td>
+                <td>{{ applicationPerson.mcmsocialsecurity }}</td>
+                <td>{{ applicationPerson.taxablesocialsecurity }}</td>
+                <td>{{ applicationPerson.mcmtaxablesocialsecurity }}</td>
+                <td>{{ applicationPerson.educatorexpenses }}</td>
+                <td>{{ applicationPerson.businessexpenses }}</td>
+                <td>{{ applicationPerson.healthsavingdeductions }}</td>
+                <td>{{ applicationPerson.movingexpenses }}</td>
+                <td>{{ applicationPerson.selfemploytaxdeduction }}</td>
+                <td>{{ applicationPerson.selfemployplans }}</td>
+                <td>{{ applicationPerson.selfemployinsdeductions }}</td>
+                <td>{{ applicationPerson.withdrawalpenalty }}</td>
+                <td>{{ applicationPerson.alimonypaid }}</td>
+                <td>{{ applicationPerson.iradeductions }}</td>
+                <td>{{ applicationPerson.studentloanintdeductions }}</td>
+                <td>{{ applicationPerson.tution }}</td>
+                <td>{{ applicationPerson.domproductiondeduction }}</td>
+                <td>{% if applicationPerson.timestamp %}{{ applicationPerson.timestamp|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ applicationPerson.nativeamerican }}</td>
+                <td>{{ applicationPerson.tobaccouser }}</td>
+                <td>{{ applicationPerson.addresszip }}</td>
+                <td>{{ applicationPerson.personid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('applicationperson_show', { 'id': applicationPerson.personid }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
