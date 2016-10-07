@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\Application1040" table="application_1040">
+    <indexes>
+      <index name="fk_1040_applicationid_idx" columns="applicationid"/>
+      <index name="fk_1040_personid_idx" columns="personid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="type1040" type="string" column="type_1040" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="typeIteration" type="smallint" column="type_iteration" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="wageType" type="string" column="wage_type" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="amount" type="decimal" column="amount" precision="13" scale="2" nullable="true"/>
+    <field name="startDate" type="date" column="start_date" nullable="true"/>
+    <field name="endDate" type="date" column="end_date" nullable="true"/>
+    <many-to-one field="personid" target-entity="Person" fetch="LAZY">
+      <join-columns>
+        <join-column name="personid" referenced-column-name="personid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="applicationid" target-entity="Application" fetch="LAZY">
+      <join-columns>
+        <join-column name="applicationid" referenced-column-name="applicationid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

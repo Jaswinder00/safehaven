@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\AnnualBenchmark" table="annual_benchmark">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fplYear" type="string" column="fpl_year" length="4" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="startAge" type="smallint" column="start_age" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="endAge" type="smallint" column="end_age" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="monthlyPremium" type="decimal" column="monthly_premium" precision="12" scale="2" nullable="true"/>
+    <field name="startDate" type="date" column="start_date" nullable="true"/>
+    <field name="endDate" type="date" column="end_date" nullable="true"/>
+    <field name="oldPremium" type="decimal" column="old_premium" precision="13" scale="2" nullable="true"/>
+  </entity>
+</doctrine-mapping>

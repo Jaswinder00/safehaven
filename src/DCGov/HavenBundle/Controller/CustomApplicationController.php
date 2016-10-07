@@ -76,7 +76,7 @@ class CustomApplicationController extends Controller
 			$state = $request->request->get('state');
 			$street = $request->request->get('street');
 			
-			$applicationid = $request->request->get('applicationid');
+			$applicationid = intval($request->request->get('applicationid'));
 			$application_name = $request->request->get('application_name');
 			//Get the Entity Manager to save the data to db
 			$em = $this->getDoctrine()->getManager();
@@ -121,7 +121,7 @@ class CustomApplicationController extends Controller
 				//Save data to Application table
 				$em->persist($application);
 				$em->flush();
-			} {
+			} else {
 				$application = $em->getRepository('DCGovHavenBundle:Application')->find($applicationid);
 			}
 			
@@ -260,7 +260,7 @@ class CustomApplicationController extends Controller
 			}
 			
 			if(null != ($request->request->get('isfiveyearmet'))) {
-				$applicationPerson->setHadfostermedicaid('Y');
+				//$applicationPerson->('Y');
 			}
 			
 			//Foster Care Information:
@@ -438,7 +438,7 @@ class CustomApplicationController extends Controller
 			
 			
 			*/
-			$applicationPerson->setTimestamp(new \DateTime('now'));
+			$applicationPerson->setCreatedTimestamp(new \DateTime('now'));
 			
 			
 			//Save data to Application table

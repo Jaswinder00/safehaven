@@ -63,9 +63,14 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="icnumber" type="string" column="icnumber" length="20" nullable="true">
+    <field name="icnumber" type="bigint" column="icnumber" nullable="true">
       <options>
-        <option name="fixed"/>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cslnumber" type="integer" column="cslnumber" nullable="true">
+      <options>
+        <option name="unsigned"/>
       </options>
     </field>
     <field name="comments" type="text" column="comments" length="65535" nullable="true">

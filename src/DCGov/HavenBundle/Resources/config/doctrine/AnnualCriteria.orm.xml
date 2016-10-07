@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DCGov\HavenBundle\Entity\AnnualCriteria" table="annual_criteria">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fplYear" type="string" column="fpl_year" length="4" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="earnedlimit" type="decimal" column="earnedlimit" precision="13" scale="2" nullable="true"/>
+    <field name="unearnedlimit" type="decimal" column="unearnedlimit" precision="13" scale="2" nullable="true"/>
+    <field name="affordablerate" type="decimal" column="affordablerate" precision="8" scale="5" nullable="true"/>
+  </entity>
+</doctrine-mapping>
